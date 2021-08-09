@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/airbnb-clone-coding/static/css/main.35f209f5.chunk.css",
+    "main.js": "/airbnb-clone-coding/static/js/main.ba256fd2.chunk.js",
+    "main.js.map": "/airbnb-clone-coding/static/js/main.ba256fd2.chunk.js.map",
+    "runtime-main.js": "/airbnb-clone-coding/static/js/runtime-main.124d4844.js",
+    "runtime-main.js.map": "/airbnb-clone-coding/static/js/runtime-main.124d4844.js.map",
+    "static/js/2.8a0c2e2a.chunk.js": "/airbnb-clone-coding/static/js/2.8a0c2e2a.chunk.js",
+    "static/js/2.8a0c2e2a.chunk.js.map": "/airbnb-clone-coding/static/js/2.8a0c2e2a.chunk.js.map",
+    "static/js/3.397dae10.chunk.js": "/airbnb-clone-coding/static/js/3.397dae10.chunk.js",
+    "static/js/3.397dae10.chunk.js.map": "/airbnb-clone-coding/static/js/3.397dae10.chunk.js.map",
+    "index.html": "/airbnb-clone-coding/index.html",
+    "static/css/main.35f209f5.chunk.css.map": "/airbnb-clone-coding/static/css/main.35f209f5.chunk.css.map",
+    "static/js/2.8a0c2e2a.chunk.js.LICENSE.txt": "/airbnb-clone-coding/static/js/2.8a0c2e2a.chunk.js.LICENSE.txt",
+    "static/media/busan.957ed41f.jpg": "/airbnb-clone-coding/static/media/busan.957ed41f.jpg",
+    "static/media/category1.52e82bcc.jpg": "/airbnb-clone-coding/static/media/category1.52e82bcc.jpg",
+    "static/media/category2.a435de4d.jpg": "/airbnb-clone-coding/static/media/category2.a435de4d.jpg",
+    "static/media/category3.ffefbac4.jpg": "/airbnb-clone-coding/static/media/category3.ffefbac4.jpg",
+    "static/media/category4.3367843a.jpg": "/airbnb-clone-coding/static/media/category4.3367843a.jpg",
+    "static/media/degu.52ecbad5.jpg": "/airbnb-clone-coding/static/media/degu.52ecbad5.jpg",
+    "static/media/gosung.5e76bbca.jpg": "/airbnb-clone-coding/static/media/gosung.5e76bbca.jpg",
+    "static/media/hosting.5457cb85.jpg": "/airbnb-clone-coding/static/media/hosting.5457cb85.jpg",
+    "static/media/jeju.b8dbc6a0.jpg": "/airbnb-clone-coding/static/media/jeju.b8dbc6a0.jpg",
+    "static/media/logo.1ee0232a.jpg": "/airbnb-clone-coding/static/media/logo.1ee0232a.jpg",
+    "static/media/seoul.d09e0a54.jpg": "/airbnb-clone-coding/static/media/seoul.d09e0a54.jpg",
+    "static/media/sukcho.97d117b3.jpg": "/airbnb-clone-coding/static/media/sukcho.97d117b3.jpg",
+    "static/media/wanju.5ae37dc6.jpg": "/airbnb-clone-coding/static/media/wanju.5ae37dc6.jpg",
+    "static/media/yangyang.ad3edad4.jpg": "/airbnb-clone-coding/static/media/yangyang.ad3edad4.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.124d4844.js",
+    "static/js/2.8a0c2e2a.chunk.js",
+    "static/css/main.35f209f5.chunk.css",
+    "static/js/main.ba256fd2.chunk.js"
+  ]
+}
