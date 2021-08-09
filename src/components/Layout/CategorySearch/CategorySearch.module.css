@@ -1,0 +1,19 @@
+.content {
+  height: 500px;
+  width: 100%;
+}
+
+.intro {
+  width: auto;
+  height: 60px;
+  margin-left: 10rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  width: 100%;
+  gap: 2rem 3rem;
+  justify-content: center;
+}

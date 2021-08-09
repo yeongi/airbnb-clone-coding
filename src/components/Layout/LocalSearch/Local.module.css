@@ -1,0 +1,22 @@
+.local {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 2px;
+  height: 120px;
+}
+
+.image {
+  background-color: royalblue;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+}
+
+.list {
+  list-style: none;
+  text-justify: auto;
+  font-size: 20px;
+  width: 200px;
+  margin: 5px;
+}

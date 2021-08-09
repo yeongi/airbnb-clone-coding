@@ -1,0 +1,18 @@
+.container {
+  display: flexbox;
+  flex-direction: row;
+  height: 400px;
+  width: 320px;
+  gap: 1px;
+}
+
+.image {
+  height: 300px;
+  width: 330px;
+  border-radius: 10px;
+}
+
+.text {
+  width: 300px;
+  font-size: 20px;
+}

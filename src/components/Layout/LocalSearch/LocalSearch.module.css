@@ -1,0 +1,19 @@
+.content {
+  height: 400px;
+  width: 100%;
+}
+
+.intro {
+  height: 40px;
+  width: auto;
+  margin-left: 10rem;
+}
+
+.local-list {
+  flex-flow: row wrap;
+  display: flex;
+  gap: 1rem 3rem;
+  width: 100%;
+  padding: 1rem;
+  justify-content: center;
+}

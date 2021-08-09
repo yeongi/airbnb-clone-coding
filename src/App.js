@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Layout/Header/Header";
+import LocalSearch from "./components/Layout/LocalSearch/LocalSearch";
+import CategorySearch from "./components/Layout/CategorySearch/CategorySearch";
+import HostRecruit from "./components/Layout/HostRecruit/HostRecruit";
+import Footer from "./components/Layout/Footer/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <main>
+        <LocalSearch />
+        <CategorySearch />
+        <HostRecruit />
+      </main>
+      <Footer />
+    </>
   );
 }
 
