@@ -8,9 +8,8 @@ import { MdLanguage } from "react-icons/md";
 import { AiTwotoneHome } from "react-icons/ai";
 import AnonymousMenu from "../profileMenu/AnonymousMenu";
 import ProfileModal from "../../UI/ProfileModal";
-import UserMenu from "../profileMenu/UserMenu";
 
-const Header = () => {
+const Header = (props) => {
   const [isUserMenuClicked, setUserMenuClicked] = useState(false);
 
   const menuClickHandler = () => {
@@ -33,9 +32,7 @@ const Header = () => {
       <nav className={classes.nav}>
         <AiTwotoneHome
           className={classes["menu-icon"]}
-          onClick={() => {
-            console.log("호스팅 메뉴..");
-          }}
+          onClick={props.onHostClick}
         />
         <MdLanguage
           className={classes["menu-icon"]}
@@ -50,7 +47,11 @@ const Header = () => {
       </nav>
       {isUserMenuClicked && (
         <ProfileModal onClose={menuCloseHandler}>
-          <AnonymousMenu onClose={menuCloseHandler} />
+          <AnonymousMenu
+            onClose={menuCloseHandler}
+            onHostClick={props.onHostClick}
+            onLoginFormClick={props.onLoginFormClick}
+          />
         </ProfileModal>
       )}
     </header>

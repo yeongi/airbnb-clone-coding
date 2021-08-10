@@ -1,18 +1,7 @@
-import { useState } from "react";
 import src from "../../../asset/hosting.jpg";
-import Modal from "../../UI/Modal";
-import HostingForm from "../HostingForm";
 import classes from "./HostRecruit.module.css";
 
-const HostRecruit = () => {
-  const [isHostFormClicked, setHostFormClicked] = useState(false);
-  const hostModalClickHandler = () => {
-    setHostFormClicked(true);
-  };
-
-  const hostModalCloseHandler = () => {
-    setHostFormClicked(false);
-  };
+const HostRecruit = (props) => {
   return (
     <div className={classes.content}>
       <img src={src} alt=" " />
@@ -23,12 +12,7 @@ const HostRecruit = () => {
         </span>
         <br />
         <br />
-        <button onClick={hostModalClickHandler}>"바로 등록하기"</button>
-        {isHostFormClicked && (
-          <Modal onClose={hostModalCloseHandler}>
-            <HostingForm />
-          </Modal>
-        )}
+        <button onClick={props.onHostClick}>"바로 등록하기"</button>
       </div>
     </div>
   );

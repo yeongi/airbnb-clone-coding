@@ -1,13 +1,23 @@
 import classes from "./menu.module.css";
 
-const AnonymousMenu = () => {
+const AnonymousMenu = (props) => {
+  const HostAndCloseHandler = () => {
+    props.onClose();
+    props.onHostClick();
+  };
+
+  const LoginAndSignUpFormCloseHandler = () => {
+    props.onClose();
+    props.onLoginFormClick();
+  };
+
   return (
     <div>
       <nav className={classes.items}>
-        <div>로그인</div>
-        <div>회원가입</div>
+        <div onClick={LoginAndSignUpFormCloseHandler}>로그인</div>
+        <div onClick={LoginAndSignUpFormCloseHandler}>회원가입</div>
         <hr />
-        <div>숙소 호스팅 하기</div>
+        <div onClick={HostAndCloseHandler}>숙소 호스팅 하기</div>
         <div>도움말</div>
       </nav>
     </div>
