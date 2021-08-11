@@ -2,7 +2,7 @@ import LocalSearch from "../components/LocalSearch/LocalSearch";
 import CategorySearch from "../components/CategorySearch/CategorySearch";
 import HostRecruit from "../components/HostRecruit/HostRecruit";
 
-const Homepage = (props) => {
+const HomePage = (props) => {
   return (
     <>
       <LocalSearch />
@@ -12,4 +12,4 @@ const Homepage = (props) => {
   );
 };
 
-export default Homepage;
+export default HomePage;

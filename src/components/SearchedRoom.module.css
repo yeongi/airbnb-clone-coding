@@ -1,0 +1,53 @@
+.wrapper {
+  display: flex;
+  gap: 2px 5px;
+  height: 240px;
+  width: 90%;
+  border-radius: 14px;
+  border: 1px solid gray;
+  background-color: white;
+  margin: 2px;
+}
+
+.wrapper img {
+  background-color: beige;
+  width: 260px;
+  height: 180px;
+  margin: 30px;
+  border-radius: 10px;
+}
+
+.container {
+  margin-top: 30px;
+}
+.location {
+  font-size: 13px;
+  color: gray;
+  margin: 5px;
+}
+
+.room-name {
+  margin: 3px;
+  font-size: 16px;
+}
+.people-facility {
+  font-size: 13px;
+  color: gray;
+}
+
+.review-star {
+  color: red;
+  margin-top: 2px;
+  margin-right: 4px;
+}
+
+.review-rating {
+  margin: 3px;
+  font-size: 16px;
+}
+
+.review-counting {
+  margin: 3px;
+  font-size: 14px;
+  color: gray;
+}

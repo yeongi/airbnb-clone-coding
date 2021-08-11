@@ -1,0 +1,9 @@
+.content {
+  height: 500px;
+  width: 100%;
+  margin-top: 200px;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: aqua;
+}

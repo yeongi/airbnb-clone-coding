@@ -1,14 +1,15 @@
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import MainFooter from "./components/Layout/MainFooter";
 import MainHeader from "./components/Layout/MainHeader";
-import Homepage from "./pages/Homepage";
+import HomePage from "./pages/HomePage";
 import RoomPage from "./pages/RoomPage";
 import SearchPage from "./pages/SearchPage";
 import HostingForm from "./components/HostingForm";
 import LoginAndSignUpForm from "./components/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
 import { useState } from "react";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   const [isHostFormClicked, setHostFormClicked] = useState(false);
@@ -40,13 +41,19 @@ const App = () => {
       >
         <Switch>
           <Route path="/" exact>
-            <Homepage hostModalClickHandler={hostModalClickHandler} />
+            <HomePage hostModalClickHandler={hostModalClickHandler} />
           </Route>
-          <Route path="/search/:keyword">
+          <Route path="/airbnb-clone-coding/">
+            <Redirect to="/" />
+          </Route>
+          <Route path="/search/:keyword" exact>
             <SearchPage />
           </Route>
-          <Route path="/rooms/:roomnumber">
+          <Route path="/rooms/:roomnumber" exact>
             <RoomPage />
+          </Route>
+          <Route path="*">
+            <NotFoundPage />
           </Route>
         </Switch>
       </MainHeader>
