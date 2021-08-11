@@ -1,4 +1,4 @@
-import src from "../../../asset/hosting.jpg";
+import src from "../../asset/hosting.jpg";
 import classes from "./HostRecruit.module.css";
 
 const HostRecruit = (props) => {

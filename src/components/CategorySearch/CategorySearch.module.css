@@ -12,6 +12,7 @@
 .wrapper {
   display: flex;
   flex-flow: row wrap;
+  text-align: center;
   flex-direction: row;
   width: 100%;
   gap: 2rem 3rem;

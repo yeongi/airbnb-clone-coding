@@ -1,14 +1,14 @@
 import Local from "./Local";
 import classes from "./LocalSearch.module.css";
 
-import busan from "../../../asset/Local/busan.jpg";
-import seoul from "../../../asset/Local/seoul.jpg";
-import yangyang from "../../../asset/Local/yangyang.jpg";
-import sukcho from "../../../asset/Local/sukcho.jpg";
-import jeju from "../../../asset/Local/jeju.jpg";
-import degu from "../../../asset/Local/degu.jpg";
-import wanju from "../../../asset/Local/wanju.jpg";
-import gosung from "../../../asset/Local/gosung.jpg";
+import busan from "../../asset/Local/busan.jpg";
+import seoul from "../../asset/Local/seoul.jpg";
+import yangyang from "../../asset/Local/yangyang.jpg";
+import sukcho from "../../asset/Local/sukcho.jpg";
+import jeju from "../../asset/Local/jeju.jpg";
+import degu from "../../asset/Local/degu.jpg";
+import wanju from "../../asset/Local/wanju.jpg";
+import gosung from "../../asset/Local/gosung.jpg";
 
 const localArray = [
   {

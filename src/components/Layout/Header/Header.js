@@ -6,8 +6,9 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { MdLanguage } from "react-icons/md";
 import { AiTwotoneHome } from "react-icons/ai";
-import AnonymousMenu from "../profileMenu/AnonymousMenu";
+import AnonymousMenu from "../../profileMenu/AnonymousMenu";
 import ProfileModal from "../../UI/ProfileModal";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   const [isUserMenuClicked, setUserMenuClicked] = useState(false);
@@ -22,7 +23,9 @@ const Header = (props) => {
 
   return (
     <header className={classes.header}>
-      <img src={logo} />
+      <Link to="/">
+        <img src={logo} className={classes.img} />
+      </Link>
       <div className={classes.wrapper}>
         <div className={classes.search}>
           검색 시작하기 <BiSearchAlt2 className={classes["search-icon"]} />

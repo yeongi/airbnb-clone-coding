@@ -1,15 +1,16 @@
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Layout/Header/Header";
-import LocalSearch from "./components/Layout/LocalSearch/LocalSearch";
-import CategorySearch from "./components/Layout/CategorySearch/CategorySearch";
-import HostRecruit from "./components/Layout/HostRecruit/HostRecruit";
-import Footer from "./components/Layout/Footer/Footer";
-import { useState } from "react";
+import MainFooter from "./components/Layout/MainFooter";
+import MainHeader from "./components/Layout/MainHeader";
+import Homepage from "./pages/Homepage";
+import RoomPage from "./pages/RoomPage";
+import SearchPage from "./pages/SearchPage";
+import HostingForm from "./components/HostingForm";
+import LoginAndSignUpForm from "./components/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
-import HostingForm from "./components/Layout/HostingForm";
-import LoginAndSignUpForm from "./components/Layout/LoginAndSignUpForm";
+import { useState } from "react";
 
-function App() {
+const App = () => {
   const [isHostFormClicked, setHostFormClicked] = useState(false);
 
   const hostModalClickHandler = () => {
@@ -31,31 +32,36 @@ function App() {
   const loginAndSignUpCloseHandler = () => {
     setLogginAndSignUpFormClicked(false);
   };
-
   return (
     <>
-      <Header
-        onHostClick={hostModalClickHandler}
-        onLoginFormClick={loginAndSignUpClickHandler}
-      />
-      <main>
-        <LocalSearch />
-        <CategorySearch />
-        <HostRecruit onHostClick={hostModalClickHandler} />
-        {isHostFormClicked && (
-          <Modal onClose={hostModalCloseHandler}>
-            <HostingForm />
-          </Modal>
-        )}
-        {isLogginAndSignUpFormClicked && (
-          <Modal onClose={loginAndSignUpCloseHandler}>
-            <LoginAndSignUpForm />
-          </Modal>
-        )}
-      </main>
-      <Footer />
+      <MainHeader
+        hostModalClickHandler={hostModalClickHandler}
+        loginAndSignUpClickHandler={loginAndSignUpClickHandler}
+      >
+        <Switch>
+          <Route path="/" exact>
+            <Homepage hostModalClickHandler={hostModalClickHandler} />
+          </Route>
+          <Route path="/search/:keyword">
+            <SearchPage />
+          </Route>
+          <Route path="/rooms/:roomnumber">
+            <RoomPage />
+          </Route>
+        </Switch>
+      </MainHeader>
+      {isHostFormClicked && (
+        <Modal onClose={hostModalCloseHandler}>
+          <HostingForm />
+        </Modal>
+      )}
+      {isLogginAndSignUpFormClicked && (
+        <Modal onClose={loginAndSignUpCloseHandler}>
+          <LoginAndSignUpForm />
+        </Modal>
+      )}
+      <MainFooter />
     </>
   );
-}
-
+};
 export default App;
