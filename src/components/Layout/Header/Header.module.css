@@ -5,7 +5,7 @@
   right: 0;
   width: 100%;
   height: 5rem;
-  background-color: rgb(245, 255, 247);
+  background-color: white;
   box-shadow: 10px 10px 20px rgba(131, 131, 131, 0.198);
   display: flex;
   z-index: 10;
@@ -17,36 +17,49 @@
   top: 0;
   left: 0;
   right: 0;
-  padding-top: 10px;
   width: 8rem;
-  height: 5rem;
+  height: 6rem;
 }
 
 .wrapper {
   display: flex;
-  padding-top: 1rem;
+  width: 15%;
+  height: 34px;
+  margin: 8px;
+  padding: 10px;
+  border: 1px solid rgba(218, 218, 218, 0.541);
+  background-color: white;
+  justify-content: space-between;
+  border-radius: 20px;
+  box-shadow: 5px 3px rgba(131, 131, 131, 0.198);
 }
 
 .search {
-  height: 40px;
-  font-size: 17px;
-  width: 15rem;
-  text-align: center;
+  padding-top: 7px;
+  margin-left: 10px;
+  font-size: 16px;
   font-weight: bold;
   color: black;
-  padding-top: 5px;
-  border: 1px solid rgba(218, 218, 218, 0.541);
-  background-color: white;
-  border-radius: 20px;
 }
 
 .search-icon {
   height: 24px;
+  margin: 4px;
+  padding-top: 3px;
   width: 24px;
-  color: red;
-  margin-left: 12px;
-  margin-top: 5px;
+  color: rgb(223, 63, 63);
+  border-radius: 5px;
   font-weight: bold;
+}
+
+.host-enroll {
+  height: 3rem;
+  width: 100px;
+  padding-top: 4px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: 900;
+  text-align: center;
 }
 
 .menu-icon {

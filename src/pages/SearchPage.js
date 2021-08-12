@@ -2,10 +2,6 @@ import { useParams } from "react-router-dom";
 import KaKaoMap from "../components/KaKaoMap/KaKaoMap";
 import classes from "./SearchPage.module.css";
 import SearchedRoom from "../components/SearchedRoom";
-const DUMMY_POS = [
-  { Lat: 33.450701, Lng: 126.570667 },
-  { Lat: 33.450701, Lng: 126.570667 },
-];
 
 const SearchPage = () => {
   const param = useParams();
@@ -24,6 +20,7 @@ const SearchPage = () => {
       NumOfBathroom: 2,
       rating: 4.99,
       NumOfReview: 71,
+      pos: { Lat: 33.450701, Lng: 126.570667 },
     },
     {
       id: "r2",
@@ -38,6 +35,7 @@ const SearchPage = () => {
       NumOfBathroom: 1,
       rating: 4.97,
       NumOfReview: 165,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r3",
@@ -52,6 +50,7 @@ const SearchPage = () => {
       NumOfBathroom: 1,
       rating: 4.93,
       NumOfReview: 14,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r4",
@@ -66,6 +65,7 @@ const SearchPage = () => {
       NumOfBathroom: 2,
       rating: 4.99,
       NumOfReview: 71,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r5",
@@ -80,6 +80,7 @@ const SearchPage = () => {
       NumOfBathroom: 1,
       rating: 4.97,
       NumOfReview: 165,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r6",
@@ -94,6 +95,7 @@ const SearchPage = () => {
       NumOfBathroom: 1,
       rating: 4.93,
       NumOfReview: 14,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r7",
@@ -108,6 +110,7 @@ const SearchPage = () => {
       NumOfBathroom: 2,
       rating: 4.99,
       NumOfReview: 71,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r8",
@@ -122,6 +125,7 @@ const SearchPage = () => {
       NumOfBathroom: 1,
       rating: 4.97,
       NumOfReview: 165,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
     {
       id: "r9",
@@ -136,6 +140,7 @@ const SearchPage = () => {
       NumOfBathroom: 1,
       rating: 4.93,
       NumOfReview: 14,
+      pos: { Lat: 32.450701, Lng: 124.570667 },
     },
   ];
 
@@ -168,12 +173,12 @@ const SearchPage = () => {
             검색결과는 {DUMMY_ROOMS.length}건 입니다.
           </span>
           <h1>{param.keyword} 에서 찾은 숙소</h1>
-
           {SearchedRoomContent}
+          <hr />
           <div className={classes.footer}>발</div>
         </div>
       </div>
-      <KaKaoMap className={classes.map} pos={DUMMY_POS[1]} />
+      <KaKaoMap className={classes.map} pos={DUMMY_ROOMS[0].pos} />
     </div>
   );
 };

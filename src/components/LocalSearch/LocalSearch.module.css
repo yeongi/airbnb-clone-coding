@@ -12,7 +12,6 @@
 .local-list {
   flex-flow: row wrap;
   display: flex;
-  flex-shrink: 1;
   gap: 1rem 3rem;
   width: 100%;
   padding: 1rem;

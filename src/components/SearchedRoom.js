@@ -2,7 +2,8 @@ import React from "react";
 import classes from "./SearchedRoom.module.css";
 import EXsrc from "../asset/exampleHome.jpg";
 import { AiFillStar } from "react-icons/ai";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { FiHeart } from "react-icons/fi";
 
 const SearchedRoom = (props) => {
   const history = useHistory();
@@ -10,11 +11,16 @@ const SearchedRoom = (props) => {
     history.push(`/rooms/${props.id}`);
   };
 
+  const wishlistAddHandler = () => {
+    console.log(props.roomname + "숙소가 위시리스트에 추가되었어요!!");
+  };
+
   return (
     <>
-      <div className={classes.wrapper} onClick={MoveToRoomDetailHandler}>
-        <img alt=" " src={EXsrc} />
-        <div className={classes.container}>
+      <hr />
+      <div className={classes.wrapper}>
+        <img alt=" " src={EXsrc} onClick={MoveToRoomDetailHandler} />
+        <div className={classes.container} onClick={MoveToRoomDetailHandler}>
           <div className={classes.location}>
             {props.gugunmyen} ,{props.sido} 의 {props.category}전체
           </div>
@@ -35,6 +41,7 @@ const SearchedRoom = (props) => {
             </span>
           </div>
         </div>
+        <FiHeart className={classes.wish} onClick={wishlistAddHandler} />
       </div>
     </>
   );

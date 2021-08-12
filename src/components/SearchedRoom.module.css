@@ -1,19 +1,15 @@
 .wrapper {
   display: flex;
-  gap: 2px 5px;
   height: 240px;
   width: 90%;
-  border-radius: 14px;
-  border: 1px solid gray;
   background-color: white;
-  margin: 2px;
 }
 
 .wrapper img {
   background-color: beige;
   width: 260px;
   height: 180px;
-  margin: 30px;
+  margin: 20px;
   border-radius: 10px;
 }
 
@@ -50,4 +46,21 @@
   margin: 3px;
   font-size: 14px;
   color: gray;
+}
+
+.wish {
+  margin: 20px;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+}
+
+.wish:hover {
+  width: 28px;
+  height: 28px;
+  -webkit-transform: rotate(10deg);
+}
+
+.wish:active {
+  color: red;
 }

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import classes from "./Header.module.css";
 import logo from "../../../asset/logo.jpg";
-import { BiSearchAlt2 } from "react-icons/bi";
+import { FaSearch } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { MdLanguage } from "react-icons/md";
 import { AiTwotoneHome } from "react-icons/ai";
@@ -27,16 +27,14 @@ const Header = (props) => {
         <img src={logo} className={classes.img} />
       </Link>
       <div className={classes.wrapper}>
-        <div className={classes.search}>
-          검색 시작하기 <BiSearchAlt2 className={classes["search-icon"]} />
-        </div>
+        <div className={classes.search}>검색 시작하기</div>
+        <FaSearch className={classes["search-icon"]} />
       </div>
 
       <nav className={classes.nav}>
-        <AiTwotoneHome
-          className={classes["menu-icon"]}
-          onClick={props.onHostClick}
-        />
+        <div className={classes["host-enroll"]} onClick={props.onHostClick}>
+          호스트 되기
+        </div>
         <MdLanguage
           className={classes["menu-icon"]}
           onClick={() => {
