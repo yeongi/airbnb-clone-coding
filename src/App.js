@@ -2,14 +2,14 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import MainFooter from "./components/Layout/MainFooter";
 import MainHeader from "./components/Layout/MainHeader";
-import HomePage from "./pages/HomePage";
-import RoomPage from "./pages/RoomPage";
-import SearchPage from "./pages/SearchPage";
+import HomePage from "./components/pages/HomePage";
+import RoomPage from "./components/pages/RoomPage/RoomPage";
+import SearchPage from "./components/pages/SearchPage";
 import HostingForm from "./components/HostingForm";
 import LoginAndSignUpForm from "./components/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
 import { useState } from "react";
-import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundPage from "./components/pages/NotFoundPage";
 
 const App = () => {
   const [isHostFormClicked, setHostFormClicked] = useState(false);

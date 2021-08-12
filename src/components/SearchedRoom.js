@@ -15,10 +15,18 @@ const SearchedRoom = (props) => {
     console.log(props.roomname + "숙소가 위시리스트에 추가되었어요!!");
   };
 
+  const onFocusAndChangeMapPosHandler = () => {
+    props.getCurPos(props.pos);
+    console.log(props.pos);
+  };
+
   return (
     <>
       <hr />
-      <div className={classes.wrapper}>
+      <div
+        className={classes.wrapper}
+        onMouseUpCapture={onFocusAndChangeMapPosHandler}
+      >
         <img alt=" " src={EXsrc} onClick={MoveToRoomDetailHandler} />
         <div className={classes.container} onClick={MoveToRoomDetailHandler}>
           <div className={classes.location}>

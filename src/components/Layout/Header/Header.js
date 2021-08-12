@@ -5,7 +5,6 @@ import logo from "../../../asset/logo.jpg";
 import { FaSearch } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { MdLanguage } from "react-icons/md";
-import { AiTwotoneHome } from "react-icons/ai";
 import AnonymousMenu from "../../profileMenu/AnonymousMenu";
 import ProfileModal from "../../UI/ProfileModal";
 import { Link } from "react-router-dom";

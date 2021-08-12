@@ -1,0 +1,46 @@
+.room-name {
+  text-align: left;
+  margin: 2rem;
+}
+
+.room-features {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.flex-item {
+  display: flex;
+  gap: 3px;
+}
+
+.flex-modal-item {
+  display: flex;
+  text-decoration: underline;
+}
+
+.room-img {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin: 2rem;
+  height: 500px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.main-img {
+  height: 110%;
+  width: 60%;
+}
+
+.side-img {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.side-img img {
+  height: 65%;
+  width: 100%;
+}

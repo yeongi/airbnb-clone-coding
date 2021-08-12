@@ -4,23 +4,23 @@ import React, { useEffect } from "react";
 const { kakao } = window;
 
 const KaKaoMap = (props) => {
+  const pos = props.pos;
   useEffect(() => {
-    const pos = props.pos;
-    const markers = [
-      {
-        position: new kakao.maps.LatLng(pos.Lat, pos.Lng),
-      },
-    ];
-    const container = document.getElementById("map");
-    const options = {
+    const mapContainer = document.getElementById("map");
+    const mapOptions = {
       //지도를 생성할 때 필요한 기본 옵션
       center: new kakao.maps.LatLng(pos.Lat, pos.Lng),
-      level: 2,
-      marker: markers,
+      level: 6,
     };
 
-    const map = new kakao.maps.Map(container, options);
-  }, []);
+    const map = new kakao.maps.Map(mapContainer, mapOptions);
+
+    const marker = new kakao.maps.Marker({
+      position: new kakao.maps.LatLng(pos.Lat, pos.Lng),
+    });
+
+    marker.setMap(map);
+  }, [pos]);
   return <div id="map" className={props.className}></div>;
 };
 

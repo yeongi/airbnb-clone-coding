@@ -1,0 +1,53 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  margin: 2rem;
+  gap: 40px;
+}
+
+.room-detail {
+  width: 70%;
+  height: 100%;
+  text-align: left;
+}
+
+.room-detail div {
+  height: 600px;
+}
+
+.room-detail hr {
+  width: 90%;
+  color: rgb(221, 221, 221);
+}
+
+.room-title {
+  margin: 10px;
+  height: 800px;
+}
+
+.room-title span {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.room-title label {
+  font-size: 15px;
+}
+.rate-form {
+  width: 30%;
+  margin-top: 30px;
+  padding-top: 20px;
+  height: 300px;
+  position: sticky;
+  top: 130px;
+  right: 10rem;
+  border: 1px solid gray;
+  border-radius: 15px;
+  box-shadow: 10px 10px rgb(167, 167, 167);
+}
+
+.room-title {
+  display: flex;
+  justify-content: space-between;
+}
