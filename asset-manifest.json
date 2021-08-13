@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/airbnb-clone-coding/static/css/main.76a16525.chunk.css",
-    "main.js": "/airbnb-clone-coding/static/js/main.b7d0f6e3.chunk.js",
-    "main.js.map": "/airbnb-clone-coding/static/js/main.b7d0f6e3.chunk.js.map",
+    "main.css": "/airbnb-clone-coding/static/css/main.fa6ccccf.chunk.css",
+    "main.js": "/airbnb-clone-coding/static/js/main.bff332b5.chunk.js",
+    "main.js.map": "/airbnb-clone-coding/static/js/main.bff332b5.chunk.js.map",
     "runtime-main.js": "/airbnb-clone-coding/static/js/runtime-main.c92b5b9c.js",
     "runtime-main.js.map": "/airbnb-clone-coding/static/js/runtime-main.c92b5b9c.js.map",
-    "static/js/2.6e0662fc.chunk.js": "/airbnb-clone-coding/static/js/2.6e0662fc.chunk.js",
-    "static/js/2.6e0662fc.chunk.js.map": "/airbnb-clone-coding/static/js/2.6e0662fc.chunk.js.map",
+    "static/js/2.3cb9230b.chunk.js": "/airbnb-clone-coding/static/js/2.3cb9230b.chunk.js",
+    "static/js/2.3cb9230b.chunk.js.map": "/airbnb-clone-coding/static/js/2.3cb9230b.chunk.js.map",
     "static/js/3.28546936.chunk.js": "/airbnb-clone-coding/static/js/3.28546936.chunk.js",
     "static/js/3.28546936.chunk.js.map": "/airbnb-clone-coding/static/js/3.28546936.chunk.js.map",
     "index.html": "/airbnb-clone-coding/index.html",
-    "static/css/main.76a16525.chunk.css.map": "/airbnb-clone-coding/static/css/main.76a16525.chunk.css.map",
-    "static/js/2.6e0662fc.chunk.js.LICENSE.txt": "/airbnb-clone-coding/static/js/2.6e0662fc.chunk.js.LICENSE.txt",
+    "static/css/main.fa6ccccf.chunk.css.map": "/airbnb-clone-coding/static/css/main.fa6ccccf.chunk.css.map",
+    "static/js/2.3cb9230b.chunk.js.LICENSE.txt": "/airbnb-clone-coding/static/js/2.3cb9230b.chunk.js.LICENSE.txt",
     "static/media/busan.957ed41f.jpg": "/airbnb-clone-coding/static/media/busan.957ed41f.jpg",
     "static/media/category1.52e82bcc.jpg": "/airbnb-clone-coding/static/media/category1.52e82bcc.jpg",
     "static/media/category2.a435de4d.jpg": "/airbnb-clone-coding/static/media/category2.a435de4d.jpg",
@@ -31,8 +31,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c92b5b9c.js",
-    "static/js/2.6e0662fc.chunk.js",
-    "static/css/main.76a16525.chunk.css",
-    "static/js/main.b7d0f6e3.chunk.js"
+    "static/js/2.3cb9230b.chunk.js",
+    "static/css/main.fa6ccccf.chunk.css",
+    "static/js/main.bff332b5.chunk.js"
   ]
 }
