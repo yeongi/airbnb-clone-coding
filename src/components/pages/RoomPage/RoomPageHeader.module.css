@@ -8,6 +8,14 @@
   justify-content: space-between;
   margin: 2rem;
 }
+.room-features item {
+  margin: 2px;
+}
+
+.header-icon {
+  color: red;
+  margin: 1px;
+}
 
 .flex-item {
   display: flex;

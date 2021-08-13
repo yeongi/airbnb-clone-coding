@@ -12,18 +12,23 @@
   text-align: left;
 }
 
-.room-detail div {
-  height: 600px;
-}
-
 .room-detail hr {
   width: 90%;
-  color: rgb(221, 221, 221);
 }
 
 .room-title {
+  display: flex;
   margin: 10px;
-  height: 800px;
+  height: 200px;
+  justify-content: space-between;
+}
+
+.room-title img {
+  height: 150px;
+  width: 150px;
+  border: 1px solid gainsboro;
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 .room-title span {
@@ -34,6 +39,7 @@
 .room-title label {
   font-size: 15px;
 }
+
 .rate-form {
   width: 30%;
   margin-top: 30px;
@@ -47,7 +53,54 @@
   box-shadow: 10px 10px rgb(167, 167, 167);
 }
 
-.room-title {
+.room-feature {
+  margin-bottom: 20px;
+}
+
+.room-feature article {
+  margin: 20px;
+  padding-bottom: 10px;
+}
+
+.room-feature h1 {
+  font-size: 30px;
+}
+
+.flex-icon {
   display: flex;
+  flex-direction: row;
+  gap: 30px;
   justify-content: space-between;
+}
+
+.icon {
+  margin: 10px;
+  height: 30px;
+  padding-top: 20px;
+  width: 30px;
+}
+
+.flex-icon div {
+  width: 90%;
+}
+
+.bedroom {
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 20%;
+  padding: 20px;
+}
+
+.footer {
+  text-align: left;
+}
+
+.footer article {
+  margin: 20px;
+  padding-bottom: 10px;
+}
+
+.map {
+  width: inherit;
+  height: 500px;
 }
