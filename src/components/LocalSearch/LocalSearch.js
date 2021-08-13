@@ -74,10 +74,12 @@ const LocalSearch = () => {
     );
   });
   return (
-    <div className={classes.content}>
-      <h1 className={classes.intro}>가까운 여행지 둘러보기</h1>
-      <div className={classes["local-list"]}>{myLocalList}</div>
-    </div>
+    <section className={classes.wrapper}>
+      <article className={classes.content}>
+        <h1 className={classes.intro}>가까운 여행지 둘러보기</h1>
+        <div className={classes["local-list"]}>{myLocalList}</div>
+      </article>
+    </section>
   );
 };
 

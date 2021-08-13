@@ -9,8 +9,8 @@ const Local = (props) => {
         <img src={props.src} alt=" " className={classes.image} />
       </Link>
       <div className={classes.list}>
-        <li>{props.local}</li>
-        <li>차로 {props.distance} 거리</li>
+        <span>{props.local}</span>
+        <p>차로 {props.distance} 거리</p>
       </div>
     </div>
   );

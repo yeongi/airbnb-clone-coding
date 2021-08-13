@@ -1,11 +1,19 @@
 .content {
   height: 400px;
+  width: 90%;
+  display: inline;
+}
+
+.wrapper {
+  text-align: center;
   width: 100%;
 }
 
 .intro {
   height: 40px;
   width: auto;
+  text-align: left;
+  font-size: 30px;
   margin-left: 10rem;
 }
 
@@ -13,7 +21,9 @@
   flex-flow: row wrap;
   display: flex;
   gap: 1rem 3rem;
+  text-align: left;
   width: 100%;
+  margin-left: 2px;
   padding: 1rem;
   justify-content: center;
 }
