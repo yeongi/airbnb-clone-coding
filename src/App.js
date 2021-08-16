@@ -6,13 +6,57 @@ import HomePage from "./components/pages/HomePage";
 import RoomPage from "./components/pages/RoomPage/RoomPage";
 import SearchPage from "./components/pages/SearchPage";
 import HostingForm from "./components/HostingForm";
-import LoginAndSignUpForm from "./components/LoginAndSignUpForm";
+import LoginAndSignUpForm from "./components/pages/LoginAndSignUp/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import SignUpForm from "./components/pages/LoginAndSignUp/SignUpForm";
+import LoginForm from "./components/pages/LoginAndSignUp/LoginForm";
+import SignUpComplete from "./components/pages/LoginAndSignUp/SignUpComplete";
+
+//회원가입 로그인 모달창 상태
+const initialModalFormState = {
+  LoginAndSignUp: false,
+  LoginForm: false,
+  LoginFailed: false,
+  SignUpForm: false,
+  SignUpComplete: false,
+  closed: true,
+};
+
+const loginSignUpRenderReducer = (state, action) => {
+  switch (action.type) {
+    case "open":
+      return { LoginAndSignUp: true, closed: false };
+    case "close":
+      return {
+        LoginAndSignUp: false,
+        LoginForm: false,
+        LoginFailed: false,
+        SignUpForm: false,
+        SignUpComplete: false,
+        closed: true,
+      };
+    case "signup":
+      return { ...state, SignUpForm: true };
+    case "signup_complete":
+      return { ...state, SignUpComplete: true };
+    case "login":
+      return { ...state, LoginForm: true, LoginFailed: false };
+    case "login_failed":
+      return { ...state, LoginFailed: true };
+    default:
+      return state;
+  }
+};
 
 const App = () => {
   const [isHostFormClicked, setHostFormClicked] = useState(false);
+
+  const [loginState, dispatchModal] = useReducer(
+    loginSignUpRenderReducer,
+    initialModalFormState
+  );
 
   const hostModalClickHandler = () => {
     setHostFormClicked(true);
@@ -22,17 +66,76 @@ const App = () => {
     setHostFormClicked(false);
   };
 
-  //로그인은 차후 context로 바꿀 예정
-  const [isLogginAndSignUpFormClicked, setLogginAndSignUpFormClicked] =
-    useState(false);
+  //로그인상태는 차후 context로 바꿀 예정
+  //로그인 & 회원가입 관련 핸들러들
+  let LoginAndSignUpContent;
 
   const loginAndSignUpClickHandler = () => {
-    setLogginAndSignUpFormClicked(true);
+    dispatchModal({ type: "open" });
   };
 
   const loginAndSignUpCloseHandler = () => {
-    setLogginAndSignUpFormClicked(false);
+    dispatchModal({ type: "close" });
   };
+
+  const loginClickHandler = () => {
+    dispatchModal({ type: "login" });
+    console.log(loginState);
+  };
+
+  const loginFailHandler = () => {
+    dispatchModal({ type: "login_failed" });
+  };
+
+  const signUpClickHandler = () => {
+    dispatchModal({ type: "signup" });
+    console.log(loginState);
+  };
+
+  const signUpCompleteClickHandler = () => {
+    dispatchModal({ type: "signup_complete" });
+  };
+
+  const completeAndLoginHandler = () => {
+    dispatchModal({ type: "close" });
+    dispatchModal({ type: "open" });
+    dispatchModal({ type: "login" });
+  };
+
+  //로그인모달창 페이지 조건문
+  if (loginState.LoginAndSignUp === true) {
+    LoginAndSignUpContent = (
+      <LoginAndSignUpForm
+        onClose={loginAndSignUpCloseHandler}
+        toLogin={loginClickHandler}
+        toSignUp={signUpClickHandler}
+      />
+    );
+  }
+
+  if (loginState.SignUpForm === true) {
+    LoginAndSignUpContent = (
+      <SignUpForm
+        toBack={loginAndSignUpClickHandler}
+        signUpComplete={signUpCompleteClickHandler}
+      />
+    );
+  }
+
+  if (loginState.LoginForm === true) {
+    LoginAndSignUpContent = <LoginForm toBack={loginAndSignUpClickHandler} />;
+  }
+
+  if (loginState.SignUpComplete === true) {
+    LoginAndSignUpContent = (
+      <SignUpComplete toLogin={completeAndLoginHandler} />
+    );
+  }
+
+  if (loginState.closed === true) {
+    LoginAndSignUpContent = "";
+  }
+
   return (
     <>
       <MainHeader
@@ -62,9 +165,9 @@ const App = () => {
           <HostingForm />
         </Modal>
       )}
-      {isLogginAndSignUpFormClicked && (
+      {loginState.LoginAndSignUp && (
         <Modal onClose={loginAndSignUpCloseHandler}>
-          <LoginAndSignUpForm />
+          {LoginAndSignUpContent}
         </Modal>
       )}
       <MainFooter />
