@@ -9,4 +9,3 @@ const LoginFail = () => {
 };
 
 export default LoginFail;
-<h1>로그인 실패 페이지</h1>;

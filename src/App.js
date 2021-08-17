@@ -13,6 +13,7 @@ import NotFoundPage from "./components/pages/NotFoundPage";
 import SignUpForm from "./components/pages/LoginAndSignUp/SignUpForm";
 import LoginForm from "./components/pages/LoginAndSignUp/LoginForm";
 import SignUpComplete from "./components/pages/LoginAndSignUp/SignUpComplete";
+import ScrollToTop from "./components/Layout/ScrollToTop";
 
 //회원가입 로그인 모달창 상태
 const initialModalFormState = {
@@ -144,13 +145,17 @@ const App = () => {
       >
         <Switch>
           <Route path="/" exact>
-            <HomePage hostModalClickHandler={hostModalClickHandler} />
+            <ScrollToTop>
+              <HomePage hostModalClickHandler={hostModalClickHandler} />
+            </ScrollToTop>
           </Route>
           <Route path="/airbnb-clone-coding/">
             <Redirect to="/" />
           </Route>
           <Route path="/search/:keyword" exact>
-            <SearchPage />
+            <ScrollToTop>
+              <SearchPage />
+            </ScrollToTop>
           </Route>
           <Route path="/rooms/:roomnumber" exact>
             <RoomPage />

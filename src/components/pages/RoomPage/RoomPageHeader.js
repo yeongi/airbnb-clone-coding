@@ -14,29 +14,29 @@ const RoomPageHeader = () => {
       </h2>
       <nav className={classes["room-features"]}>
         <div className={classes["flex-item"]}>
-          <item>
+          <div>
             <AiTwotoneStar className={classes["header-icon"]} />
             후기
-          </item>
+          </div>
 
-          <item>
+          <div>
             <ImLocation className={classes["header-icon"]} />
             주소 지역
-          </item>
-          <item>
+          </div>
+          <div>
             <AiFillHome className={classes["header-icon"]} />
             편의 시설
-          </item>
+          </div>
         </div>
         <div className={classes["flex-modal-item"]}>
-          <item>
+          <div>
             <FiShare />
             공유
-          </item>
-          <item>
+          </div>
+          <div>
             <GiSaveArrow />
             저장
-          </item>
+          </div>
         </div>
       </nav>
       <div className={classes["room-img"]}>

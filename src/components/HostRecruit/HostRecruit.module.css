@@ -4,7 +4,7 @@
 }
 .content {
   margin: 10px;
-  height: 600px;
+  height: auto;
   width: 80%;
   display: inline-block;
   text-align: center;
