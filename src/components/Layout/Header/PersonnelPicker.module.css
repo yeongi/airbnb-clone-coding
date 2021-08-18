@@ -14,3 +14,19 @@
 .wrapper hr {
   width: 90%;
 }
+
+.button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  border: 1px solid black;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
