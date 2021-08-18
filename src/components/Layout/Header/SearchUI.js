@@ -1,32 +1,89 @@
-import React, { useRef, useState } from "react";
+import React, { useReducer, useRef, useState } from "react";
 import ReactDom from "react-dom";
 import classes from "./SearchUI.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PersonnelPicker from "./PersonnelPicker";
+import SearchKeyword from "./SearchKeyword";
 
-const PersonnelOverlay = (props) => {
+const Overlay = (props) => {
   return <div className={classes.overlay}>{props.children}</div>;
 };
 
+const clickedReducer = (state, action) => {
+  switch (action.type) {
+    case "search":
+      return {
+        isPickerClicked: false,
+        isLocationClicked: true,
+        isDatePickerClicked: false,
+      };
+    case "calander":
+      return {
+        isPickerClicked: false,
+        isLocationClicked: false,
+        isDatePickerClicked: true,
+      };
+    case "picker":
+      return {
+        isPickerClicked: true,
+        isLocationClicked: false,
+        isDatePickerClicked: false,
+      };
+    case "close":
+      return {
+        isPickerClicked: false,
+        isLocationClicked: false,
+        isDatePickerClicked: false,
+      };
+    default:
+      return;
+  }
+};
+
 const SearchUI = () => {
-  const [isPickerCliked, setPersennelpickerClicked] = useState(false);
+  const [isClickState, dispatchClick] = useReducer(clickedReducer, {
+    isPickerClicked: false,
+    isSearchClicked: false,
+    isDatePickerClicked: false,
+  });
+
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const [personnel, setPersonnel] = useState();
+  // const [personnel, setPersonnel] = useState();
+  const [locationKeyword, setLocationKeyword] = useState(" ");
+
+  const locationSearchHandler = () => {
+    dispatchClick({ type: "search" });
+  };
+
+  //검색창에서 키보드를 칠 때
+  const onChangeKewordHandler = (e) => {
+    if (e.target) {
+      setLocationKeyword(e.target.value);
+    }
+    dispatchClick({ type: "search" });
+  };
+
+  //검색창에서 검색어를 골랐을때
+  const setKeywordHandler = (keyword) => {
+    setLocationKeyword(keyword);
+    dispatchClick({ type: "calander" });
+  };
 
   const personnelPickerClickHandler = () => {
-    if (isPickerCliked) {
-      setPersennelpickerClicked(false);
-      return;
-    }
-    if (!isPickerCliked) {
-      setPersennelpickerClicked(true);
-      return;
+    if (!isClickState.isPickerClicked) {
+      dispatchClick({ type: "picker" });
+    } else {
+      dispatchClick({ type: "close" });
     }
   };
 
   const protalElements = document.getElementById("overlay");
+
+  const onClickCalander = () => {
+    dispatchClick({ type: "calander" });
+  };
 
   const onDateChange = (dates) => {
     const [start, end] = dates;
@@ -34,23 +91,36 @@ const SearchUI = () => {
     setEndDate(end);
   };
 
-  const refContainer = useRef(null);
+  const refCounterContainer = useRef(null);
 
   const onCountChange = (pickerObj, allCounts) => {
-    setPersonnel(pickerObj);
-    if (refContainer.current !== null) {
+    if (refCounterContainer.current !== null) {
       const content = `총 ${allCounts} 명`;
-      refContainer.current.value = content;
+      refCounterContainer.current.value = content;
     }
+    // setPersonnel(pickerObj);
   };
 
   return (
     <>
-      {isPickerCliked &&
+      {isClickState.isPickerClicked &&
         ReactDom.createPortal(
-          <PersonnelOverlay>
-            <PersonnelPicker onCountChange={onCountChange} />
-          </PersonnelOverlay>,
+          <Overlay>
+            <PersonnelPicker
+              onCountChange={onCountChange}
+              closeClickHandler={personnelPickerClickHandler}
+            />
+          </Overlay>,
+          protalElements
+        )}
+      {isClickState.isLocationClicked &&
+        ReactDom.createPortal(
+          <Overlay>
+            <SearchKeyword
+              keyword={locationKeyword}
+              selected={setKeywordHandler}
+            />
+          </Overlay>,
           protalElements
         )}
       <div className={classes.wrapper}>
@@ -62,9 +132,15 @@ const SearchUI = () => {
           <div className={classes.container}>
             <div className={classes.edge}>
               <b>위치</b>
-              <input type="text" placeholder="어디로 여행가세요?" />
+              <input
+                type="text"
+                placeholder="어디로 여행가세요?"
+                onChange={onChangeKewordHandler}
+                onClick={locationSearchHandler}
+                value={locationKeyword}
+              />
             </div>
-            <div className={classes.check}>
+            <div className={classes.check} onClick={onClickCalander}>
               <b>체크인</b>
               <DatePicker
                 showDisabledMonthNavigation
@@ -88,7 +164,8 @@ const SearchUI = () => {
                 type="text"
                 placeholder="게스트 추가"
                 readOnly
-                ref={refContainer}
+                onClick={personnelPickerClickHandler}
+                ref={refCounterContainer}
               />
             </div>
             <div className={classes.search}>

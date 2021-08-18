@@ -1,0 +1,40 @@
+.wrapper {
+  position: fixed;
+  width: 300px;
+  height: 400px;
+  z-index: 30;
+  top: 11rem;
+  padding: 5px;
+  margin: 10px;
+  left: 30%;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 30px;
+  background-color: white;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper header {
+  display: flex;
+  justify-content: center;
+  padding: 6px;
+}
+
+.result-wrapper {
+  margin: 7px;
+  border: 1px solid black;
+  text-align: left;
+  border-radius: 30px;
+}
+.result-wrapper li {
+  font-size: 18px;
+  margin: 10px;
+  padding: 3px;
+}
+.result-wrapper li:hover {
+  background-color: rgba(167, 167, 167, 0.52);
+}

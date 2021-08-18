@@ -22,6 +22,8 @@ const pickerReducer = (state, action) => {
       return { ...state, toddler: state.toddler + 1 };
     case "toddler_decrement":
       return { ...state, toddler: state.toddler - 1 };
+    case "reset":
+      return { adult: 0, chidren: 0, toddler: 0 };
     default:
   }
 };
@@ -59,14 +61,25 @@ const PersonnelPicker = (props) => {
     }
   };
 
+  const resetClickHandler = () => {
+    dispatchPicker({ type: "reset" });
+  };
+
   const allPerson =
     pickerState.adult + pickerState.chidren + pickerState.toddler;
 
-  console.log("총 인원:" + allPerson);
   props.onCountChange(pickerState, allPerson);
 
   return (
     <div className={classes.wrapper}>
+      <div className={classes.container}>
+        <button onClick={props.closeClickHandler} className={classes.button}>
+          X
+        </button>
+        <button onClick={resetClickHandler} className={classes.button}>
+          R
+        </button>
+      </div>
       <Counter
         label="성인"
         age="만 13세 이상"
