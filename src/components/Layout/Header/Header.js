@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReactDom from "react-dom";
 import classes from "./Header.module.css";
 import logo from "../../../asset/logo.jpg";
@@ -7,9 +7,11 @@ import { FaSearch } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { MdLanguage } from "react-icons/md";
 import AnonymousMenu from "../../profileMenu/AnonymousMenu";
+import UserMenu from "../../profileMenu/UserMenu";
 import ProfileModal from "../../UI/ProfileModal";
 import { Link } from "react-router-dom";
 import SearchUI from "./SearchUI";
+import AuthContext from "../../../store/auth-context";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onClose}></div>;
@@ -21,6 +23,8 @@ const Header = (props) => {
   const [isUserMenuClicked, setUserMenuClicked] = useState(false);
 
   const [isSearchClicked, setSearchClicked] = useState(false);
+
+  const authCtx = useContext(AuthContext);
 
   const menuClickHandler = () => {
     setUserMenuClicked(true);
@@ -71,15 +75,24 @@ const Header = (props) => {
           onClick={menuClickHandler}
         />
       </nav>
-      {isUserMenuClicked && (
-        <ProfileModal onClose={menuCloseHandler}>
-          <AnonymousMenu
-            onClose={menuCloseHandler}
-            onHostClick={props.onHostClick}
-            onLoginFormClick={props.onLoginFormClick}
-          />
-        </ProfileModal>
-      )}
+      {isUserMenuClicked &&
+        (authCtx.isLoggedIn ? (
+          <ProfileModal onClose={menuCloseHandler}>
+            <UserMenu
+              onClose={menuCloseHandler}
+              onHostClick={props.onHostClick}
+              onLoginFormClick={props.onLoginFormClick}
+            />
+          </ProfileModal>
+        ) : (
+          <ProfileModal onClose={menuCloseHandler}>
+            <AnonymousMenu
+              onClose={menuCloseHandler}
+              onHostClick={props.onLoginFormClick}
+              onLoginFormClick={props.onLoginFormClick}
+            />
+          </ProfileModal>
+        ))}
     </header>
   );
 };

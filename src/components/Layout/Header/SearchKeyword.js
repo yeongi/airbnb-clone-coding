@@ -6,7 +6,7 @@ const SearchKeyword = (props) => {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    if (props.keyword.length) {
+    if (props.keyword.trim().length) {
       const content = AllLocation.filter((item) =>
         item.includes(props.keyword.trim())
       );

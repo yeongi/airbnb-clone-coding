@@ -16,10 +16,16 @@
   border-radius: 10px;
 }
 
+.text h1 {
+  font-weight: bold;
+  color: white;
+  font-size: 50px;
+}
+
 .content .text {
   position: absolute;
   top: 100px;
-  left: 14rem;
+  left: 10rem;
   margin: 3rem;
   z-index: 3;
   text-align: left;
@@ -35,4 +41,5 @@
   width: 160px;
   border-radius: 20px;
   border: 1px solid white;
+  color: black;
 }

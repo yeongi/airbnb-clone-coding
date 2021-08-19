@@ -1,0 +1,59 @@
+.wrapper header {
+  display: flex;
+}
+
+.wrapper header span {
+  font-size: 16px;
+}
+
+.wrapper header h2 {
+  font-size: 20px;
+  margin-left: 130px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.wrapper hr {
+  width: 100%;
+}
+
+.wrapper input {
+  height: 50px;
+  border-radius: 10px;
+}
+
+.signup-wrapper {
+  height: 550px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.signup-wrapper Input {
+  padding: 6px;
+  font-size: 19px;
+  border-radius: 10px;
+}
+
+.signup-wrapper h2 {
+  text-align: center;
+}
+
+.signup-wrapper hr {
+  width: 100%;
+}
+
+.signup-wrapper::-webkit-scrollbar {
+  display: none;
+}

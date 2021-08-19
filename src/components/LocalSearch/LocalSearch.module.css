@@ -1,11 +1,12 @@
 .content {
   height: auto;
-  width: 90%;
+  width: 80%;
   display: inline;
 }
 
 .wrapper {
   text-align: center;
+  padding: 30px;
   width: 100%;
   height: auto;
 }
@@ -16,6 +17,7 @@
   text-align: left;
   font-size: 30px;
   margin-left: 10rem;
+  font-weight: bold;
 }
 
 .local-list {

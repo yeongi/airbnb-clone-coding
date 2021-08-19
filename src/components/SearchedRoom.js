@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./SearchedRoom.module.css";
 import EXsrc from "../asset/exampleHome.jpg";
 import { AiFillStar } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
+import AuthContext from "../store/auth-context";
 
 const SearchedRoom = (props) => {
+  const AuthCtx = useContext(AuthContext);
   const history = useHistory();
   const MoveToRoomDetailHandler = () => {
     history.push(`/rooms/${props.id}`);
   };
 
   const wishlistAddHandler = () => {
-    console.log(props.roomname + "숙소가 위시리스트에 추가되었어요!!");
+    if (AuthCtx.isLoggedIn) {
+      console.log(props.roomname + "숙소가 위시리스트에 추가되었어요!!");
+      return;
+    } else {
+      props.onLogin();
+      return;
+    }
   };
 
   const onFocusAndChangeMapPosHandler = () => {

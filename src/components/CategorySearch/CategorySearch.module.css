@@ -7,6 +7,9 @@
   width: auto;
   height: 60px;
   margin-left: 10rem;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 30px;
 }
 
 .wrapper {
@@ -16,5 +19,6 @@
   flex-direction: row;
   width: 100%;
   gap: 2rem 3rem;
+  padding: 10px;
   justify-content: center;
 }

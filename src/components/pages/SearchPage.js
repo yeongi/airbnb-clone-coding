@@ -4,7 +4,7 @@ import classes from "./SearchPage.module.css";
 import SearchedRoom from "../SearchedRoom";
 import { useState } from "react";
 
-const SearchPage = () => {
+const SearchPage = (props) => {
   const param = useParams();
 
   const DUMMY_ROOMS = [
@@ -169,6 +169,7 @@ const SearchPage = () => {
         rating={room.rating}
         NumOfReview={room.NumOfReview}
         pos={room.pos}
+        onLogin={props.onLogin}
         getCurPos={curFocusPosHandler}
       />
     );

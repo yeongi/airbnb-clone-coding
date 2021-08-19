@@ -8,12 +8,13 @@ import SearchPage from "./components/pages/SearchPage";
 import HostingForm from "./components/HostingForm";
 import LoginAndSignUpForm from "./components/pages/LoginAndSignUp/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import SignUpForm from "./components/pages/LoginAndSignUp/SignUpForm";
 import LoginForm from "./components/pages/LoginAndSignUp/LoginForm";
 import SignUpComplete from "./components/pages/LoginAndSignUp/SignUpComplete";
 import ScrollToTop from "./components/Layout/ScrollToTop";
+import AuthContext from "./store/auth-context";
 
 //회원가입 로그인 모달창 상태
 const initialModalFormState = {
@@ -54,13 +55,21 @@ const loginSignUpRenderReducer = (state, action) => {
 const App = () => {
   const [isHostFormClicked, setHostFormClicked] = useState(false);
 
-  const [loginState, dispatchModal] = useReducer(
+  const [loginFormState, dispatchModal] = useReducer(
     loginSignUpRenderReducer,
     initialModalFormState
   );
 
+  const authCtx = useContext(AuthContext);
+
   const hostModalClickHandler = () => {
-    setHostFormClicked(true);
+    if (authCtx.isLoggedIn) {
+      setHostFormClicked(true);
+      return;
+    } else {
+      dispatchModal({ type: "open" });
+      return;
+    }
   };
 
   const hostModalCloseHandler = () => {
@@ -81,7 +90,6 @@ const App = () => {
 
   const loginClickHandler = () => {
     dispatchModal({ type: "login" });
-    console.log(loginState);
   };
 
   const loginFailHandler = () => {
@@ -90,7 +98,7 @@ const App = () => {
 
   const signUpClickHandler = () => {
     dispatchModal({ type: "signup" });
-    console.log(loginState);
+    console.log(loginFormState);
   };
 
   const signUpCompleteClickHandler = () => {
@@ -104,7 +112,7 @@ const App = () => {
   };
 
   //로그인모달창 페이지 조건문
-  if (loginState.LoginAndSignUp === true) {
+  if (loginFormState.LoginAndSignUp === true) {
     LoginAndSignUpContent = (
       <LoginAndSignUpForm
         onClose={loginAndSignUpCloseHandler}
@@ -114,7 +122,7 @@ const App = () => {
     );
   }
 
-  if (loginState.SignUpForm === true) {
+  if (loginFormState.SignUpForm === true) {
     LoginAndSignUpContent = (
       <SignUpForm
         toBack={loginAndSignUpClickHandler}
@@ -123,17 +131,22 @@ const App = () => {
     );
   }
 
-  if (loginState.LoginForm === true) {
-    LoginAndSignUpContent = <LoginForm toBack={loginAndSignUpClickHandler} />;
+  if (loginFormState.LoginForm === true) {
+    LoginAndSignUpContent = (
+      <LoginForm
+        toBack={loginAndSignUpClickHandler}
+        onClose={loginAndSignUpCloseHandler}
+      />
+    );
   }
 
-  if (loginState.SignUpComplete === true) {
+  if (loginFormState.SignUpComplete === true) {
     LoginAndSignUpContent = (
       <SignUpComplete toLogin={completeAndLoginHandler} />
     );
   }
 
-  if (loginState.closed === true) {
+  if (loginFormState.closed === true) {
     LoginAndSignUpContent = "";
   }
 
@@ -154,7 +167,7 @@ const App = () => {
           </Route>
           <Route path="/search/:keyword" exact>
             <ScrollToTop>
-              <SearchPage />
+              <SearchPage onLogin={loginAndSignUpClickHandler} />
             </ScrollToTop>
           </Route>
           <Route path="/rooms/:roomnumber" exact>
@@ -170,7 +183,7 @@ const App = () => {
           <HostingForm />
         </Modal>
       )}
-      {loginState.LoginAndSignUp && (
+      {loginFormState.LoginAndSignUp && (
         <Modal onClose={loginAndSignUpCloseHandler}>
           {LoginAndSignUpContent}
         </Modal>

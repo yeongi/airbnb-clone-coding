@@ -1,6 +1,14 @@
+import { useContext } from "react";
+import AuthContext from "../../store/auth-context";
 import classes from "./menu.module.css";
 
 const UserMenu = () => {
+  const authCtx = useContext(AuthContext);
+
+  const onLogOutHandler = () => {
+    authCtx.onLogOut();
+    alert("로그아웃 되었습니다.");
+  };
   return (
     <div>
       <nav className={classes.items}>
@@ -13,7 +21,7 @@ const UserMenu = () => {
         <div>계정</div>
         <div>도움말</div>
         <hr />
-        <div>로그 아웃</div>
+        <div onClick={onLogOutHandler}>로그 아웃</div>
       </nav>
     </div>
   );

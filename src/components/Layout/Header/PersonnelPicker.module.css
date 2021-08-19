@@ -1,8 +1,8 @@
 .wrapper {
   position: fixed;
-  top: 11rem;
+  top: 14em;
   width: 300px;
-  right: 30%;
+  right: 35%;
   background-color: white;
   z-index: 30;
   border: 1px solid rgb(216, 216, 216);
