@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 const { daum } = window;
 
 const AdressSearch = (props) => {
-  const roadAddress = useRef("");
   const [address, setAddress] = useState();
 
   function sample4_execDaumPostcode() {
@@ -33,8 +32,6 @@ const AdressSearch = (props) => {
         }
 
         // 우편번호와 주소 정보를 해당 필드에 넣는다.
-        console.log(roadAddress);
-        roadAddress.current.state.value = roadAddr;
         setAddress(roadAddr);
         props.result(roadAddr);
 
@@ -57,18 +54,10 @@ const AdressSearch = (props) => {
   }
   return (
     <>
-      <Button type="primary" onClick={sample4_execDaumPostcode} block>
+      <Button type="default" onClick={sample4_execDaumPostcode} block>
         주소 검색하기
       </Button>
       <br />
-      <Input
-        type="text"
-        id="roadAddress"
-        value={address}
-        ref={roadAddress}
-        placeholder="도로명주소"
-        readOnly
-      />
       <span id="guide"></span>
     </>
   );

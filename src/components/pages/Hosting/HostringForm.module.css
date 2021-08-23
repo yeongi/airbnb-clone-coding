@@ -1,3 +1,17 @@
+.wrapper {
+  overflow-y: scroll;
+  height: 700px;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper section {
+  padding: 2px;
+  margin: 5px;
+}
+
 .container {
   text-align: center;
   margin: 10px;

@@ -1,0 +1,11 @@
+.wrapper {
+  text-align: center;
+}
+
+.button {
+  width: 30%;
+  text-align: center;
+  margin: 20;
+  border: 0px;
+  background-color: rgb(173, 221, 223);
+}

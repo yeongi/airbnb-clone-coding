@@ -82,7 +82,7 @@ const PersonnelPicker = (props) => {
       </div>
       <Counter
         label="성인"
-        age="만 13세 이상"
+        detail="만 13세 이상"
         value={pickerState.adult}
         onPlus={adultPlusClickHandler}
         onMinus={adultMinusClickHandler}
@@ -90,7 +90,7 @@ const PersonnelPicker = (props) => {
       <hr />
       <Counter
         label="어린이"
-        age="만 2~12세"
+        detail="만 2~12세"
         value={pickerState.chidren}
         onPlus={chidrenPlusClickHandler}
         onMinus={chidrenMinusClickHandler}
@@ -98,7 +98,7 @@ const PersonnelPicker = (props) => {
       <hr />
       <Counter
         label="유아"
-        age="만 2세미만"
+        detail="만 2세미만"
         value={pickerState.toddler}
         onPlus={toddlerPlusClickHandler}
         onMinus={toddlerMinusClickHandler}

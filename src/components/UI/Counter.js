@@ -7,7 +7,7 @@ const Counter = (props) => {
       <div>
         <b>{props.label}</b>
         <br />
-        <span>{props.age}</span>
+        <span>{props.detail}</span>
       </div>
       <div className={classes.counter}>
         <button onClick={props.onMinus}>-</button>
