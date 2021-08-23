@@ -5,7 +5,7 @@ import MainHeader from "./components/Layout/MainHeader";
 import HomePage from "./components/pages/HomePage";
 import RoomPage from "./components/pages/RoomPage/RoomPage";
 import SearchPage from "./components/pages/SearchPage";
-import HostingForm from "./components/HostingForm";
+import HostingForm from "./components/pages/Hosting/HostingForm";
 import LoginAndSignUpForm from "./components/pages/LoginAndSignUp/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
 import { useContext, useReducer, useState } from "react";
@@ -15,6 +15,7 @@ import LoginForm from "./components/pages/LoginAndSignUp/LoginForm";
 import SignUpComplete from "./components/pages/LoginAndSignUp/SignUpComplete";
 import ScrollToTop from "./components/Layout/ScrollToTop";
 import AuthContext from "./store/auth-context";
+import Wishlists from "./components/pages/Wishlists";
 
 //회원가입 로그인 모달창 상태
 const initialModalFormState = {
@@ -173,6 +174,11 @@ const App = () => {
           <Route path="/rooms/:roomnumber" exact>
             <RoomPage />
           </Route>
+          <Route path="/wishlists">
+            <Wishlists />
+          </Route>
+          <Route path="/trips"></Route>
+          <Route path="/account-setting"></Route>
           <Route path="*">
             <NotFoundPage />
           </Route>

@@ -1,0 +1,11 @@
+.container {
+  text-align: center;
+  margin: 10px;
+}
+
+.map {
+  width: 80%;
+  height: 400px;
+  display: inline-block;
+  border: 1px solid black;
+}

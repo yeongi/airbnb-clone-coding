@@ -4,7 +4,7 @@ import { FaMedal } from "react-icons/fa";
 import { GrLocation } from "react-icons/gr";
 import { VscKey } from "react-icons/vsc";
 import { BiBed } from "react-icons/bi";
-import KaKaoStaticMap from "../../KaKaoMap/KaKaoStaticMap";
+import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
 
 const RoomPageMain = () => {
   return (
@@ -112,9 +112,9 @@ const RoomPageMain = () => {
         <hr />
         <article>
           <h1>호스팅 지역</h1>
-          <KaKaoStaticMap
+          <KaKaoSearchAdress
             className={classes.map}
-            pos={{ Lat: 35.16233189724507, Lng: 128.98598773141606 }}
+            addr={"부산광역시 강서구 입소정관길 203"}
           />
         </article>
         <hr />

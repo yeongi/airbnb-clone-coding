@@ -6,7 +6,8 @@ const KaKaoSearchAdress = (props) => {
     const container = document.getElementById("map");
     const options = {
       center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 6,
+      level: 3,
+      draggable: false,
     };
     const map = new kakao.maps.Map(container, options);
     //위도, 경도로 변환 및 마커표시

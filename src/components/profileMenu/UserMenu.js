@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import classes from "./menu.module.css";
 
@@ -9,13 +10,14 @@ const UserMenu = () => {
     authCtx.onLogOut();
     alert("로그아웃 되었습니다.");
   };
+
   return (
     <div>
       <nav className={classes.items}>
         <div>메세지</div>
         <div>알림</div>
         <div>여행</div>
-        <div>위시리스트</div>
+        <Link to="/wishlists">위시리스트</Link>
         <hr />
         <div>숙소 호스팅 하기</div>
         <div>계정</div>

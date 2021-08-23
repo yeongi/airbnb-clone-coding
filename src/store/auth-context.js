@@ -19,6 +19,7 @@ export const AuthContextProvider = (props) => {
     setIsLoggedIn(true);
   };
 
+  //페이지가 렌더링 될때 세션을 확인 하는 로직
   useEffect(() => {
     const session = true;
     //로그인을 확인하는 로직
