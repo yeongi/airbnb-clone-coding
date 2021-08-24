@@ -31,39 +31,48 @@ const pickerReducer = (state, action) => {
 const RoomInfoCount = (props) => {
   const [countState, dispatchPicker] = useReducer(pickerReducer, initialState);
 
-  const headCountPlusClickHandler = () => {
+  const headCountPlusClickHandler = (e) => {
+    e.preventDefault();
     dispatchPicker({ type: "headCount_increment" });
   };
 
-  const headCountMinusClickHandler = () => {
+  const headCountMinusClickHandler = (e) => {
+    e.preventDefault();
     if (countState.headCount > 0) {
       dispatchPicker({ type: "headCount_decrement" });
     }
   };
 
-  const bedPlusClickHandler = () => {
+  const bedPlusClickHandler = (e) => {
+    e.preventDefault();
     dispatchPicker({ type: "numOfBed_increment" });
   };
 
-  const bedMinusClickHandler = () => {
+  const bedMinusClickHandler = (e) => {
+    e.preventDefault();
     if (countState.numOfBed > 0) {
       dispatchPicker({ type: "numOfBed_decrement" });
     }
   };
 
-  const bathPlusClickHandler = () => {
+  const bathPlusClickHandler = (e) => {
+    e.preventDefault();
     dispatchPicker({ type: "numOfBath_increment" });
   };
 
-  const bathMinusClickHandler = () => {
+  const bathMinusClickHandler = (e) => {
+    e.preventDefault();
     if (countState.numOfBath > 0) {
       dispatchPicker({ type: "numOfBath_decrement" });
     }
   };
 
-  const resetClickHandler = () => {
+  const resetClickHandler = (e) => {
+    e.preventDefault();
     dispatchPicker({ type: "reset" });
   };
+
+  props.onCounterChange(countState);
 
   return (
     <div>
