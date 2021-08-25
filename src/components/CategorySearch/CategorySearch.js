@@ -11,28 +11,38 @@ const CategoryArray = [
     id: "c1",
     src: img1,
     text: "주택",
+    name: "housing",
   },
   {
     id: "c2",
     src: img2,
     text: "아파트",
+    name: "apartment",
   },
   {
     id: "c3",
     src: img3,
     text: "팬션",
+    name: "rental cottage",
   },
   {
     id: "c4",
     src: img4,
     text: "풀빌라",
+    name: "pool villa",
   },
 ];
 
 const CategorySearch = () => {
   const myCategoryList = CategoryArray.map((item) => {
     return (
-      <Category key={item.id} id={item.id} src={item.src} text={item.text} />
+      <Category
+        key={item.id}
+        id={item.id}
+        src={item.src}
+        text={item.text}
+        name={item.name}
+      />
     );
   });
 

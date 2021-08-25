@@ -5,8 +5,17 @@ import { GrLocation } from "react-icons/gr";
 import { VscKey } from "react-icons/vsc";
 import { BiBed } from "react-icons/bi";
 import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
+import { Button, Input } from "antd";
+import { useHistory } from "react-router-dom";
 
-const RoomPageMain = () => {
+const RoomPageMain = (props) => {
+  const history = useHistory();
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(history);
+    history.push(`/book/stays/123`);
+  };
+
   return (
     <>
       <div className={classes.wrapper}>
@@ -98,10 +107,15 @@ const RoomPageMain = () => {
           </section>
         </div>
         <aside className={classes["rate-form"]}>
-          <span>요금을 확인하려면 날짜를 입력하세요.</span>
-          <p>후기</p>
-          <div>날짜 form 넣을 예정</div>
-          <button>예약하기</button>
+          <form onSubmit={onSubmitHandler}>
+            <span>요금을 확인하려면 날짜를 입력하세요.</span>
+            <p>별 별점, 후기개수</p>
+            <Input type="date" placeholder="날짜추가" />
+            <Input type="text" placeholder="게스트 1명" />
+            <Button type="primary" block htmlType="submit">
+              예약하기
+            </Button>
+          </form>
         </aside>
       </div>
       <section className={classes["footer"]}>

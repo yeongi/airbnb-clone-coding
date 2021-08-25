@@ -1,13 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import KaKaoMap from "../KaKaoMap/KaKaoMap";
 import classes from "./SearchPage.module.css";
 import SearchedRoom from "../SearchedRoom";
 import { useState } from "react";
 import { getRoomAxios } from "../../API/userAxios";
 import EXsrc from "../../asset/exampleHome.jpg";
+import queryString from "query-string";
 const SearchPage = (props) => {
   const param = useParams();
   const [roomList, setRoom] = useState();
+
+  const location = useLocation();
+  console.log(location);
+
+  const query = queryString.parse(location.search);
+  console.log(query);
 
   const DUMMY_ROOMS = [
     {
@@ -44,6 +51,23 @@ const SearchPage = (props) => {
     setFocusAddr(address);
   };
 
+  let title = <h1>{param.keyword} 에서 찾은 숙소</h1>;
+
+  switch (query.searchType) {
+    case "default":
+      title = <h1>{param.keyword} 에서 찾은 숙소</h1>;
+      console.log(query);
+      break;
+    case "local":
+      title = <h1>{param.keyword} 지역에 있는 숙소</h1>;
+      break;
+    case "category":
+      title = <h1>{param.keyword} </h1>;
+      break;
+    default:
+      break;
+  }
+
   const SearchedRoomContent = DUMMY_ROOMS.map((room) => {
     return (
       <SearchedRoom
@@ -64,6 +88,7 @@ const SearchPage = (props) => {
         facility={room.facility}
         onLogin={props.onLogin}
         getCurAddr={curFocusAddrHandler}
+        guests={query.headCount}
       />
     );
   });
@@ -76,7 +101,7 @@ const SearchPage = (props) => {
             검색결과는 {DUMMY_ROOMS.length}건 입니다.
           </span>
           <button onClick={axiosGetHandler}>데이터 요청하기</button>
-          <h1>{param.keyword} 에서 찾은 숙소</h1>
+          {title}
           {SearchedRoomContent}
           <hr />
           <div className={classes.footer}>발</div>

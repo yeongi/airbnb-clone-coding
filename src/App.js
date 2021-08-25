@@ -16,6 +16,9 @@ import SignUpComplete from "./components/pages/LoginAndSignUp/SignUpComplete";
 import ScrollToTop from "./components/Layout/ScrollToTop";
 import AuthContext from "./store/auth-context";
 import Wishlists from "./components/pages/Wishlists";
+import Trips from "./components/pages/Trips";
+import Account from "./components/pages/Account";
+import BookRoom from "./components/pages/BookPage/BookRoom";
 
 //회원가입 로그인 모달창 상태
 const initialModalFormState = {
@@ -174,16 +177,24 @@ const App = () => {
           <Route path="/rooms/:roomnumber" exact>
             <RoomPage />
           </Route>
-          <Route path="/wishlists">
+          <Route path="/book/stays/:roomnumber" exact>
+            <BookRoom />
+          </Route>
+          <Route path="/wishlists" exact>
             <Wishlists />
           </Route>
-          <Route path="/trips"></Route>
-          <Route path="/account-setting"></Route>
+          <Route path="/trips" exact>
+            <Trips />
+          </Route>
+          <Route path="/account-setting" exact>
+            <Account />
+          </Route>
           <Route path="*">
             <NotFoundPage />
           </Route>
         </Switch>
       </MainHeader>
+
       {isHostFormClicked && (
         <Modal onClose={hostModalCloseHandler}>
           <HostingForm />

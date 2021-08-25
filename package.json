@@ -10,6 +10,7 @@
     "antd": "^4.16.12",
     "antd-img-crop": "^3.14.3",
     "axios": "^0.21.1",
+    "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-calendar": "^3.4.0",
     "react-datepicker": "^4.2.0",

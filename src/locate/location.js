@@ -31,4 +31,4 @@ const tempArray = AllLocationArray.reduce((acc, cur) => {
   return acc.concat(cur);
 });
 
-export const AllLocation = tempArray.concat(sidoArray);
+export const AllLocation = tempArray.concat(sidoArray).sort();

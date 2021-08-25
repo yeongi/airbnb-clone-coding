@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PersonnelPicker from "./PersonnelPicker";
 import SearchKeyword from "./SearchKeyword";
+import { useHistory } from "react-router-dom";
 
 const Overlay = (props) => {
   return <div className={classes.overlay}>{props.children}</div>;
@@ -41,7 +42,7 @@ const clickedReducer = (state, action) => {
   }
 };
 
-const SearchUI = () => {
+const SearchUI = (props) => {
   const [isClickState, dispatchClick] = useReducer(clickedReducer, {
     isPickerClicked: false,
     isSearchClicked: false,
@@ -50,7 +51,12 @@ const SearchUI = () => {
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  // const [personnel, setPersonnel] = useState();
+  const [personnel, setPersonnel] = useState({
+    adult: 0,
+    child: 0,
+    toddler: 0,
+  });
+  const [headCount, setHeadCount] = useState();
   const [locationKeyword, setLocationKeyword] = useState(" ");
 
   const locationSearchHandler = () => {
@@ -93,12 +99,28 @@ const SearchUI = () => {
 
   const refCounterContainer = useRef(null);
 
-  const onCountChange = (pickerObj, allCounts) => {
-    if (refCounterContainer.current !== null) {
-      const content = `총 ${allCounts} 명`;
-      refCounterContainer.current.value = content;
+  const onCountChange = (state, allCounts) => {
+    setPersonnel(state);
+    const content = `총 ${allCounts} 명`;
+    setHeadCount(allCounts);
+    refCounterContainer.current.value = content;
+  };
+
+  const mainHistory = useHistory();
+
+  const searchSubmitHandler = (e) => {
+    let path;
+    e.preventDefault();
+    console.log(mainHistory);
+    if (startDate !== undefined) {
+      path = `/search/${locationKeyword}?searchType=default&checkInDate=${startDate.toDateString()}&checkOutDate=${endDate.toDateString()}&headCount=${headCount}`;
+      mainHistory.push(path);
     }
-    // setPersonnel(pickerObj);
+    if (startDate === undefined) {
+      path = `/search/${locationKeyword}?searchType=default&headCount=${headCount}`;
+      mainHistory.push(path);
+    }
+    props.onClose();
   };
 
   return (
@@ -128,19 +150,22 @@ const SearchUI = () => {
           숙소
           <hr />
         </div>
-        <form>
+        <form onSubmit={searchSubmitHandler}>
           <div className={classes.container}>
-            <div className={classes.edge}>
+            <section className={classes.edge}>
               <b>위치</b>
               <input
-                type="text"
+                type="search"
+                required
                 placeholder="어디로 여행가세요?"
                 onChange={onChangeKewordHandler}
                 onClick={locationSearchHandler}
                 value={locationKeyword}
+                required
+                autoFocus
               />
-            </div>
-            <div className={classes.check} onClick={onClickCalander}>
+            </section>
+            <section className={classes.check} onClick={onClickCalander}>
               <b>체크인</b>
               <DatePicker
                 showDisabledMonthNavigation
@@ -153,24 +178,28 @@ const SearchUI = () => {
                 monthsShown={2}
                 calendarClassName={classes["date-picker"]}
               />
-            </div>
-            <div className={classes.check}>
+            </section>
+            <section className={classes.check}>
               <b>체크아웃</b>
               <input type="text" readOnly />
-            </div>
-            <div className={classes.edge} onClick={personnelPickerClickHandler}>
+            </section>
+            <section
+              className={classes.edge}
+              onClick={personnelPickerClickHandler}
+            >
               <b>인원</b>
               <input
                 type="text"
+                required
                 placeholder="게스트 추가"
                 readOnly
                 onClick={personnelPickerClickHandler}
                 ref={refCounterContainer}
               />
-            </div>
-            <div className={classes.search}>
+            </section>
+            <section className={classes.search}>
               <button type="submit">검색</button>
-            </div>
+            </section>
           </div>
         </form>
       </div>

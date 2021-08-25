@@ -4,7 +4,9 @@ import classes from "./Category.module.css";
 const Category = (props) => {
   return (
     <div className={classes.container}>
-      <Link to={`/search/${props.text}`}>
+      <Link
+        to={`/search/${props.text}?searchType=category&category=${props.name}`}
+      >
         <img src={props.src} className={classes.image} />
       </Link>
 

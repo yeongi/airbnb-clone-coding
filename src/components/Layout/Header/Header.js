@@ -52,7 +52,7 @@ const Header = (props) => {
           portalElements
         )}
       {isSearchClicked ? (
-        <SearchUI />
+        <SearchUI onClose={searchClosedHandler} />
       ) : (
         <div className={classes.wrapper} onClick={searchClickHandler}>
           <div className={classes.search}>검색 시작하기</div>
@@ -81,11 +81,13 @@ const Header = (props) => {
             <UserMenu
               onClose={menuCloseHandler}
               onHostClick={props.onHostClick}
-              onLoginFormClick={props.onLoginFormClick}
             />
           </ProfileModal>
         ) : (
-          <ProfileModal onClose={menuCloseHandler}>
+          <ProfileModal
+            onClose={menuCloseHandler}
+            onHostClick={props.onLoginFormClick}
+          >
             <AnonymousMenu
               onClose={menuCloseHandler}
               onHostClick={props.onLoginFormClick}

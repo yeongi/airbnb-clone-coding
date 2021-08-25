@@ -5,7 +5,7 @@ import classes from "./Local.module.css";
 const Local = (props) => {
   return (
     <div className={classes.local}>
-      <Link to={`/search/${props.local}`}>
+      <Link to={`/search/${props.local}?searchType=local`}>
         <img src={props.src} alt=" " className={classes.image} />
       </Link>
       <div className={classes.list}>

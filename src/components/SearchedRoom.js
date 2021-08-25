@@ -9,7 +9,7 @@ const SearchedRoom = (props) => {
   const AuthCtx = useContext(AuthContext);
   const history = useHistory();
   const MoveToRoomDetailHandler = () => {
-    history.push(`/rooms/${props.id}`);
+    history.push(`/rooms/${props.id}?guests=${props.guests}`);
   };
 
   const wishlistAddHandler = () => {
