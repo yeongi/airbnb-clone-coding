@@ -2,19 +2,17 @@ import { useLocation, useParams } from "react-router-dom";
 import KaKaoMap from "../KaKaoMap/KaKaoMap";
 import classes from "./SearchPage.module.css";
 import SearchedRoom from "../SearchedRoom";
-import { useState } from "react";
-import { getRoomAxios } from "../../API/userAxios";
+import { useEffect, useState } from "react";
+import { getRoomAxios } from "../../API/roomAxios";
 import EXsrc from "../../asset/exampleHome.jpg";
 import queryString from "query-string";
 const SearchPage = (props) => {
   const param = useParams();
-  const [roomList, setRoom] = useState();
+  const [roomList, setRoom] = useState([]);
 
   const location = useLocation();
-  console.log(location);
 
   const query = queryString.parse(location.search);
-  console.log(query);
 
   const DUMMY_ROOMS = [
     {
@@ -35,13 +33,31 @@ const SearchPage = (props) => {
     },
   ];
 
+  useEffect(() => {
+    //프로미스 객체
+    const RoomPromise = getRoomAxios();
+    RoomPromise.then((response) => {
+      //성공 시 데이터를 가져옴
+      //data를 배열로 작업하는 함수
+      const list = Object.values(response.data).reduce((acc, cur) => {
+        return acc.concat(cur);
+      });
+      setRoom(list);
+      console.log(list);
+    });
+  }, []);
+
   const axiosGetHandler = () => {
     //프로미스 객체
-    const RoomList = getRoomAxios();
-    RoomList.then((data) => {
+    const RoomPromise = getRoomAxios();
+    RoomPromise.then((response) => {
       //성공 시 데이터를 가져옴
-      setRoom(data);
-      console.log(roomList);
+      //data를 배열로 작업하는 함수
+      const list = Object.values(response.data).reduce((acc, cur) => {
+        return acc.concat(cur);
+      });
+      setRoom(list);
+      console.log(list);
     });
   };
 
@@ -68,23 +84,25 @@ const SearchPage = (props) => {
       break;
   }
 
-  const SearchedRoomContent = DUMMY_ROOMS.map((room) => {
+  const SearchedRoomContent = roomList.map((room) => {
     return (
       <SearchedRoom
         key={room.id}
         id={room.id}
-        imgPath={room.imgPath}
+        imgPath={EXsrc}
         location={room.location}
         roomTitle={room.title}
         sido={room.sido}
         address={room.address}
         gugunmyen={room.gugunmyen}
         category={room.category}
-        Headcount={room.Headcount}
-        NumOfBed={room.NumOfBed}
-        NumOfBathroom={room.NumOfBathroom}
-        rating={room.rating}
-        NumOfReview={room.NumOfReview}
+        Headcount={room.headCount}
+        NumOfBed={room.numOfBath}
+        NumOfBathroom={room.numOfBed}
+        // rating={room.rating}
+        // NumOfReview={room.NumOfReview}
+        rating="3.11"
+        NumOfReview="100"
         facility={room.facility}
         onLogin={props.onLogin}
         getCurAddr={curFocusAddrHandler}
@@ -98,7 +116,7 @@ const SearchPage = (props) => {
       <div className={classes["scroll-box"]}>
         <div className={classes["room-container"]}>
           <span className={classes["search-result-text"]}>
-            검색결과는 {DUMMY_ROOMS.length}건 입니다.
+            검색결과는 {roomList.length}건 입니다.
           </span>
           <button onClick={axiosGetHandler}>데이터 요청하기</button>
           {title}

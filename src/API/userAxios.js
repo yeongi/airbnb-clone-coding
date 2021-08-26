@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const SignUpAPI = axios.create({
-  baseURL: "https://react-http-training-199ed-default-rtdb.firebaseio.com",
+  // baseURL: "https://react-http-training-199ed-default-rtdb.firebaseio.com",
+  baseURL: "http://192.168.64.9:8080",
   headers: {
     "Content-Type": "application/json",
   },
@@ -16,35 +17,15 @@ export const userSignUpPostAxios = async (user) => {
   }
 };
 
-export const userGetAxios = async (userId, userPW) => {
+export const signInPostAxios = async (userId, userPW) => {
   try {
-    const response = await SignUpAPI.get("/users.json", {
-      params: {
-        email: userId,
-        passward: userPW,
-      },
+    const response = await SignUpAPI.post("/signIn", {
+      email: userId,
+      password: userPW,
     });
-    console.log(response);
+
+    return response;
   } catch (e) {
     console.log(e);
   }
-};
-
-export const RoomAPI = axios.create({
-  baseURL: "http://192.168.64.9:8080/rooms",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-export const getRoomAxios = async () => {
-  let data;
-  try {
-    const response = await RoomAPI.get();
-    data = await response;
-  } catch (e) {
-    console.log(e);
-  }
-
-  return data;
 };

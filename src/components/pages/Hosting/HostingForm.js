@@ -6,6 +6,7 @@ import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
 import RoomInfoCount from "./RoomInfoCount";
 import moment from "moment";
 import ImgCrop from "antd-img-crop";
+import { hostPostAxios } from "../../../API/roomAxios";
 
 const HostingForm = () => {
   const roadAddressRef = useRef("");
@@ -100,19 +101,26 @@ const HostingForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(
-      "주소:",
-      roadAddress,
-      "카테고리:",
-      category,
-      "숙소 기본 정보",
-      roomCounter,
-      "체크인 시작 날짜",
-      checkInStart,
-      "방정보:",
-      roomInputs
-    );
+    const hosting = [
+      {
+        address: roadAddress,
+        category: category,
+        headCount: roomCounter.headCount,
+        numOfBath: roomCounter.numOfBath,
+        numOfBed: roomCounter.numOfBed,
+        detailAddress: roomInputs.detailAddress,
+        roomname: roomInputs.roomname,
+        basicCost: roomInputs.basicCost,
+        cleanUpCost: roomInputs.cleanUpCost,
+        roomInfo: roomInputs.roomInfo,
+        title: roomInputs.title,
+        content: roomInputs.content,
+        checkInStart: checkInStart,
+      },
+    ];
+    hostPostAxios(hosting);
   };
+
   return (
     <div className={classes.wrapper}>
       <h1>호스팅 신청하기</h1>

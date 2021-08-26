@@ -16,6 +16,14 @@ const RoomPageMain = (props) => {
     history.push(`/book/stays/123`);
   };
 
+  let guestsContent;
+
+  if (props.guests === "undefined") {
+    guestsContent = "게스트를 선택해 주세요.";
+  } else {
+    console.log(props.guests);
+    guestsContent = `게스트 ${props.guests}명`;
+  }
   return (
     <>
       <div className={classes.wrapper}>
@@ -111,7 +119,7 @@ const RoomPageMain = (props) => {
             <span>요금을 확인하려면 날짜를 입력하세요.</span>
             <p>별 별점, 후기개수</p>
             <Input type="date" placeholder="날짜추가" />
-            <Input type="text" placeholder="게스트 1명" />
+            <Input type="text" placeholder="게스트 1명" value={guestsContent} />
             <Button type="primary" block htmlType="submit">
               예약하기
             </Button>
