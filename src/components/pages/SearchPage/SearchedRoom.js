@@ -3,7 +3,7 @@ import classes from "./SearchedRoom.module.css";
 import { AiFillStar } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
-import AuthContext from "../store/auth-context";
+import AuthContext from "../../../store/auth-context";
 
 const SearchedRoom = (props) => {
   const AuthCtx = useContext(AuthContext);
@@ -37,12 +37,12 @@ const SearchedRoom = (props) => {
         <img alt=" " src={props.imgPath} onClick={MoveToRoomDetailHandler} />
         <div className={classes.container} onClick={MoveToRoomDetailHandler}>
           <div className={classes.location}>
-            {props.gugunmyen} ,{props.sido} 의 {props.category}전체
+            {props.gugunmyen} , {props.sido} 의 {props.category}
           </div>
           <div className={classes["room-title"]}>{props.roomTitle}</div>
           <hr />
           <div className={classes["people-facility"]}>
-            최대 인원 {props.Headcount}명ㆍ 침실 {props.NumOfBedroom}개 ㆍ 침대{" "}
+            최대 인원 {props.Headcount}명ㆍ 침대
             {props.NumOfBed}개 ㆍ 욕실 {props.NumOfBathroom}개
           </div>
           <div className={classes["people-facility"]}>{props.facility}</div>

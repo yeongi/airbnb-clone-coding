@@ -4,7 +4,7 @@ import MainFooter from "./components/Layout/MainFooter";
 import MainHeader from "./components/Layout/MainHeader";
 import HomePage from "./components/pages/HomePage";
 import RoomPage from "./components/pages/RoomPage/RoomPage";
-import SearchPage from "./components/pages/SearchPage";
+import SearchPage from "./components/pages/SearchPage/SearchPage";
 import HostingForm from "./components/pages/Hosting/HostingForm";
 import LoginAndSignUpForm from "./components/pages/LoginAndSignUp/LoginAndSignUpForm";
 import Modal from "./components/UI/Modal";
@@ -19,6 +19,7 @@ import Wishlists from "./components/pages/Wishlists";
 import Trips from "./components/pages/Trips";
 import Account from "./components/pages/Account";
 import BookRoom from "./components/pages/BookPage/BookRoom";
+import MiniHeader from "./components/Layout/MiniHeader";
 
 //회원가입 로그인 모달창 상태
 const initialModalFormState = {
@@ -156,18 +157,15 @@ const App = () => {
 
   return (
     <>
-      <MainHeader
-        hostModalClickHandler={hostModalClickHandler}
-        loginAndSignUpClickHandler={loginAndSignUpClickHandler}
-      >
-        <Switch>
+      <Switch>
+        <MainHeader
+          hostModalClickHandler={hostModalClickHandler}
+          loginAndSignUpClickHandler={loginAndSignUpClickHandler}
+        >
           <Route path="/" exact>
             <ScrollToTop>
               <HomePage hostModalClickHandler={hostModalClickHandler} />
             </ScrollToTop>
-          </Route>
-          <Route path="/airbnb-clone-coding/">
-            <Redirect to="/" />
           </Route>
           <Route path="/search/:keyword" exact>
             <ScrollToTop>
@@ -176,6 +174,9 @@ const App = () => {
           </Route>
           <Route path="/rooms/:roomnumber" exact>
             <RoomPage />
+          </Route>
+          <Route path="/airbnb-clone-coding/">
+            <Redirect to="/" />
           </Route>
           <Route path="/book/stays/:roomnumber" exact>
             <BookRoom />
@@ -189,12 +190,11 @@ const App = () => {
           <Route path="/account-setting" exact>
             <Account />
           </Route>
-          <Route path="*">
+          <Redirect from="*" to="/">
             <NotFoundPage />
-          </Route>
-        </Switch>
-      </MainHeader>
-
+          </Redirect>
+        </MainHeader>
+      </Switch>
       {isHostFormClicked && (
         <Modal onClose={hostModalCloseHandler}>
           <HostingForm />

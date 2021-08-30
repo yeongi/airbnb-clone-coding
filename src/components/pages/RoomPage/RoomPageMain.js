@@ -6,14 +6,13 @@ import { VscKey } from "react-icons/vsc";
 import { BiBed } from "react-icons/bi";
 import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
 import { Button, Input } from "antd";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const RoomPageMain = (props) => {
   const history = useHistory();
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(history);
-    history.push(`/book/stays/123`);
   };
 
   let guestsContent;
@@ -121,7 +120,7 @@ const RoomPageMain = (props) => {
             <Input type="date" placeholder="날짜추가" />
             <Input type="text" placeholder="게스트 1명" value={guestsContent} />
             <Button type="primary" block htmlType="submit">
-              예약하기
+              <Link to={`/book/stays/s`}>예약하기</Link>
             </Button>
           </form>
         </aside>

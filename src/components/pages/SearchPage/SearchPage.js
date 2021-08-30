@@ -1,10 +1,10 @@
 import { useLocation, useParams } from "react-router-dom";
-import KaKaoMap from "../KaKaoMap/KaKaoMap";
+import KaKaoMap from "../../KaKaoMap/KaKaoMap";
 import classes from "./SearchPage.module.css";
-import SearchedRoom from "../SearchedRoom";
+import SearchedRoom from "./SearchedRoom";
 import { useEffect, useState } from "react";
-import { getRoomAxios } from "../../API/roomAxios";
-import EXsrc from "../../asset/exampleHome.jpg";
+import { getRoomAxios } from "../../../API/roomAxios";
+import EXsrc from "../../../asset/exampleHome.jpg";
 import queryString from "query-string";
 const SearchPage = (props) => {
   const param = useParams();
@@ -47,19 +47,19 @@ const SearchPage = (props) => {
     });
   }, []);
 
-  const axiosGetHandler = () => {
-    //프로미스 객체
-    const RoomPromise = getRoomAxios();
-    RoomPromise.then((response) => {
-      //성공 시 데이터를 가져옴
-      //data를 배열로 작업하는 함수
-      const list = Object.values(response.data).reduce((acc, cur) => {
-        return acc.concat(cur);
-      });
-      setRoom(list);
-      console.log(list);
-    });
-  };
+  // const axiosGetHandler = () => {
+  //   //프로미스 객체
+  //   const RoomPromise = getRoomAxios();
+  //   RoomPromise.then((response) => {
+  //     //성공 시 데이터를 가져옴
+  //     //data를 배열로 작업하는 함수
+  //     const list = Object.values(response.data).reduce((acc, cur) => {
+  //       return acc.concat(cur);
+  //     });
+  //     setRoom(list);
+  //     console.log(list);
+  //   });
+  // };
 
   const [curFocusingAddr, setFocusAddr] = useState(DUMMY_ROOMS[0].address);
 
@@ -118,7 +118,6 @@ const SearchPage = (props) => {
           <span className={classes["search-result-text"]}>
             검색결과는 {roomList.length}건 입니다.
           </span>
-          <button onClick={axiosGetHandler}>데이터 요청하기</button>
           {title}
           {SearchedRoomContent}
           <hr />

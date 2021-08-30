@@ -21,9 +21,11 @@ const LoginForm = (props) => {
     )
       .then((res) => {
         console.log(res);
+        return res;
       })
       .then((error) => {
         console.log(error);
+        return error;
       });
 
     // AuthCtx.onLogIn();
