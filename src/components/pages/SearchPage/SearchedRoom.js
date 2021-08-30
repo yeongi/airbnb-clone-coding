@@ -9,7 +9,9 @@ const SearchedRoom = (props) => {
   const AuthCtx = useContext(AuthContext);
   const history = useHistory();
   const MoveToRoomDetailHandler = () => {
-    history.push(`/rooms/${props.id}?guests=${props.guests}`);
+    history.push(
+      `/rooms/${props.id}?guests=${props.guests}&checkInDate=${props.checkInDate}&checkOutDate=${props.checkOutDate}`
+    );
   };
 
   const wishlistAddHandler = () => {

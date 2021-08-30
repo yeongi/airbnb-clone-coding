@@ -7,19 +7,20 @@ import { userSignUpPostAxios } from "../../../API/userAxios";
 const SignUpForm = (props) => {
   const name = useRef("");
   const email = useRef("");
-  const birth = useRef("");
-  const number = useRef("");
-  const passward = useRef("");
+  const birthday = useRef("");
+  const phone = useRef("");
+  const password = useRef("");
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
+    console.log(birthday.current.state.value);
     const user = {
       name: name.current.state.value,
       email: email.current.state.value,
-      birth: birth.current.state.value,
-      number: number.current.state.value,
-      passward: passward.current.state.value,
+      birthday: birthday.current.state.value,
+      phone: phone.current.state.value,
+      password: password.current.state.value,
     };
     userSignUpPostAxios(user);
   };
@@ -35,20 +36,26 @@ const SignUpForm = (props) => {
         <hr />
         <Input placeholder="이름" type="text" name="name" ref={name} />
         <p>정부 발급 신분증에 표시된 이름과 일치하는지 확인하세요.</p>
-        <Input placeholder="ex)19980928" type="text" name="birth" ref={birth} />
+        <Input
+          placeholder="ex)19980928"
+          type="date"
+          name="birthday"
+          defaultValue="1998-09-28"
+          ref={birthday}
+        />
         <p>
           만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 에어비앤비의
           다른 회원에게 공개되지 않습니다.
         </p>
         <Input placeholder="이메일" type="email" name="email" ref={email} />
         <p>예약 확인과 영수증을 이메일로 보내드립니다.</p>
-        <Input placeholder="전화번호" name="number" ref={number} />
+        <Input placeholder="전화번호" name="number" ref={phone} />
         <p>전화번호를 입력해주세요.</p>
         <Input
           placeholder="비밀번호"
           type="password"
-          name="passward"
-          ref={passward}
+          name="password"
+          ref={password}
         />
         <p>비밀번호를 신중하게 입력해주세요.</p>
         <hr />

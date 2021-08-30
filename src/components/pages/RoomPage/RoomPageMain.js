@@ -5,10 +5,34 @@ import { GrLocation } from "react-icons/gr";
 import { VscKey } from "react-icons/vsc";
 import { BiBed } from "react-icons/bi";
 import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
-import { Button, Input } from "antd";
+import { Button, Input, DatePicker } from "antd";
 import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import moment from "moment";
 
+const { RangePicker } = DatePicker;
+
+const dateFormat = "YYYY/MM/DD";
+let dateSelected = false;
 const RoomPageMain = (props) => {
+  let initailState = {
+    checkIn: moment(new Date(), dateFormat),
+    checkOut: moment(new Date(), dateFormat),
+    guests: props.guests,
+  };
+
+  if (props.checkIn !== "undefined") {
+    initailState = {
+      checkIn: moment(props.checkIn, dateFormat),
+      checkOut: moment(props.checkOut, dateFormat),
+      guests: props.guests,
+    };
+
+    dateSelected = true;
+  }
+
+  const [bookingState, setState] = useState(initailState);
+
   const history = useHistory();
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -23,6 +47,20 @@ const RoomPageMain = (props) => {
     console.log(props.guests);
     guestsContent = `게스트 ${props.guests}명`;
   }
+
+  const pickerChangeHandler = (e) => {
+    console.log(e);
+    dateSelected = true;
+    setState((prev) => {
+      return {
+        ...prev,
+        checkIn: e[0],
+        checkOut: e[1],
+      };
+    });
+    console.log(bookingState);
+  };
+
   return (
     <>
       <div className={classes.wrapper}>
@@ -106,19 +144,45 @@ const RoomPageMain = (props) => {
             <hr />
             <article>
               <h2>체크인 날짜를 선택해 주세요.</h2>
-              <form>
-                <input type="date" />
-                <input type="date" />
-              </form>
+              <form></form>
             </article>
           </section>
         </div>
         <aside className={classes["rate-form"]}>
           <form onSubmit={onSubmitHandler}>
-            <span>요금을 확인하려면 날짜를 입력하세요.</span>
-            <p>별 별점, 후기개수</p>
-            <Input type="date" placeholder="날짜추가" />
-            <Input type="text" placeholder="게스트 1명" value={guestsContent} />
+            {dateSelected ? (
+              <h2>요금을 확인하세요.</h2>
+            ) : (
+              <h2>요금을 확인하려면 날짜를 입력하세요.</h2>
+            )}
+            <span>별 별점, 후기개수</span>
+            <div className={classes["form-wrapper"]}>
+              <RangePicker
+                format={dateFormat}
+                placeholder={["체크인 날짜", "체크아웃 날짜"]}
+                value={
+                  dateSelected && [bookingState.checkIn, bookingState.checkOut]
+                }
+                onChange={pickerChangeHandler}
+              />
+              <Input
+                type="text"
+                placeholder="게스트 1명"
+                value={guestsContent}
+              />
+            </div>
+
+            <div className={classes["rate-wrapper"]}>
+              <span>청소비</span>
+              <p>￦ 청소비용얼마 (원)</p>
+            </div>
+            <div className={classes["rate-wrapper"]}>
+              <span>1박 * 게스트 (명)</span>
+              <p>￦ 숙박 비용 얼마 (원)</p>
+            </div>
+            <span className={classes.rate}>
+              <b>총 금액 : </b> 1박 * 게스트 + 청소비(원)
+            </span>
             <Button type="primary" block htmlType="submit">
               <Link to={`/book/stays/s`}>예약하기</Link>
             </Button>

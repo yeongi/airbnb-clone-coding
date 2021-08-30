@@ -21,16 +21,21 @@ const LoginForm = (props) => {
     )
       .then((res) => {
         console.log(res);
+        if (res.data.email === userId.current.state.value) {
+          AuthCtx.onLogIn();
+          props.onClose();
+          alert("로그인 성공..!");
+        } else {
+          alert("로그인 실패...");
+        }
         return res;
       })
       .then((error) => {
         console.log(error);
+        alert("로그인 실패" + error);
         return error;
       });
-
-    // AuthCtx.onLogIn();
-    // props.onClose();
-    // alert("로그인 성공..!");
+    console.log(res);
   };
   return (
     <div className={classes.wrapper}>

@@ -13,6 +13,7 @@ const SearchPage = (props) => {
   const location = useLocation();
 
   const query = queryString.parse(location.search);
+  console.log(query);
 
   const DUMMY_ROOMS = [
     {
@@ -107,6 +108,8 @@ const SearchPage = (props) => {
         onLogin={props.onLogin}
         getCurAddr={curFocusAddrHandler}
         guests={query.headCount}
+        checkInDate={query.checkInDate}
+        checkOutDate={query.checkOutDate}
       />
     );
   });

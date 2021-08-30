@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import PersonnelPicker from "./PersonnelPicker";
 import SearchKeyword from "./SearchKeyword";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 
 const Overlay = (props) => {
   return <div className={classes.overlay}>{props.children}</div>;
@@ -41,6 +42,8 @@ const clickedReducer = (state, action) => {
       return;
   }
 };
+
+const dateFormat = "YYYY/MM/DD";
 
 const SearchUI = (props) => {
   const [isClickState, dispatchClick] = useReducer(clickedReducer, {
@@ -113,7 +116,11 @@ const SearchUI = (props) => {
     e.preventDefault();
     console.log(mainHistory);
     if (startDate !== undefined) {
-      path = `/search/${locationKeyword}?searchType=default&checkInDate=${startDate.toDateString()}&checkOutDate=${endDate.toDateString()}&headCount=${headCount}`;
+      path = `/search/${locationKeyword}?searchType=default&checkInDate=${moment(
+        startDate
+      ).format(dateFormat)}&checkOutDate=${moment(endDate).format(
+        dateFormat
+      )}&headCount=${headCount}`;
       mainHistory.push(path);
     }
     if (startDate === undefined) {

@@ -10,7 +10,7 @@ export const SignUpAPI = axios.create({
 
 export const userSignUpPostAxios = async (user) => {
   try {
-    await SignUpAPI.post("/users.json", JSON.stringify(user));
+    await SignUpAPI.post("/signUp", JSON.stringify(user));
     console.log("통신 성공!", user);
   } catch (e) {
     console.log(e);

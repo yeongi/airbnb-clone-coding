@@ -23,7 +23,11 @@ const RoomPage = () => {
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <RoomPageHeader />
-        <RoomPageMain guests={query.guests} />
+        <RoomPageMain
+          guests={query.guests}
+          checkIn={query.checkInDate}
+          checkOut={query.checkOutDate}
+        />
       </div>
       {stempsrc}
     </div>
