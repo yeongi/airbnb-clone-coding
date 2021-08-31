@@ -14,6 +14,7 @@ const AdressSearch = (props) => {
         // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
         // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
         let roadAddr = data.roadAddress; // 도로명 주소 변수
+        let jibunAddr = data.jibunAddress; // 지번 주소 변수
         let extraRoadAddr = ""; // 참고 항목 변수
 
         // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -32,8 +33,7 @@ const AdressSearch = (props) => {
         }
 
         // 우편번호와 주소 정보를 해당 필드에 넣는다.
-        setAddress(roadAddr);
-        props.result(roadAddr);
+        props.result(roadAddr, jibunAddr);
 
         const guideTextBox = document.getElementById("guide");
         // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.

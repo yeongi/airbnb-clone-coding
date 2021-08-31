@@ -1,17 +1,17 @@
-import { Input, Button, DatePicker, Upload, Radio } from "antd";
+import { Input, Button, DatePicker, Upload, Radio, Checkbox } from "antd";
 import React, { useRef, useState } from "react";
 import AdressSearch from "./AdressSearch";
 import classes from "./HostringForm.module.css";
 import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
 import RoomInfoCount from "./RoomInfoCount";
-import moment from "moment";
 import ImgCrop from "antd-img-crop";
 import { hostPostAxios } from "../../../API/roomAxios";
 
 const HostingForm = () => {
   const roadAddressRef = useRef("");
+  const jibunAddressRef = useRef("");
   const [roadAddress, setRoadAdress] = useState("");
-  const [checkInStart, setCheckIn] = useState(new Date());
+  const [jibunAddress, setJibun] = useState("");
   const [category, setCategory] = useState("poolVilla");
   const [roomCounter, setRoomCounter] = useState({
     headCount: 1,
@@ -19,26 +19,42 @@ const HostingForm = () => {
     numOfBath: 1,
   });
 
+  //편의 시설 state
+  const [facility, setChecked] = useState({
+    tv: false,
+    hairDryer: false,
+    fireExtinguisher: false,
+    refrigerator: false,
+    microwave: false,
+    cookware: false,
+    park: false,
+    aircon: false,
+    kitchen: false,
+    wifi: false,
+    washingMachine: false,
+    selfCheckIn: false,
+    commonSolo: false,
+  });
+
+  const onCheckBoxChange = (checkedValues) => {
+    const { checked, name } = checkedValues.target;
+    setChecked((prevState) => {
+      return { ...prevState, [name]: checked };
+    });
+    console.log(facility);
+  };
+
   //제어 컴포넌트 state
   const [roomInputs, setInputs] = useState({
     detailAddress: "",
     roomname: "",
     basicCost: 0,
     cleanUpCost: 0,
-    roomInfo: "",
-    title: "",
     content: "",
   });
 
-  const {
-    detailAddress,
-    roomname,
-    basicCost,
-    cleanUpCost,
-    roomInfo,
-    title,
-    content,
-  } = roomInputs;
+  const { detailAddress, roomname, basicCost, cleanUpCost, roomInfo, content } =
+    roomInputs;
 
   const onInputsChange = (e) => {
     //e.target에서 name과 value 를 추출
@@ -52,22 +68,17 @@ const HostingForm = () => {
     setRoomCounter(state);
   };
 
-  const onAdressChangeHandler = (address) => {
-    roadAddressRef.current.state.value = address;
-    setRoadAdress(address);
+  const onAdressChangeHandler = (road, jibun) => {
+    roadAddressRef.current.state.value = road;
+    jibunAddressRef.current.state.value = jibun;
+    setRoadAdress(road);
+    setJibun(jibun);
   };
 
   const onCategoryChange = (e) => {
     console.log(e.target.value);
     setCategory(e.target.value);
   };
-
-  const onDateChange = (m, dateString) => {
-    //m은 moment 객체
-    setCheckIn(dateString);
-  };
-
-  const dateFormat = "YYYY/MM/DD";
 
   //antd 이미지 업로더 라이브러리
 
@@ -103,7 +114,8 @@ const HostingForm = () => {
     e.preventDefault();
     const hosting = [
       {
-        address: roadAddress,
+        roadAddress: roadAddress,
+        jibunAddress: jibunAddress,
         category: category,
         headCount: roomCounter.headCount,
         numOfBath: roomCounter.numOfBath,
@@ -112,13 +124,12 @@ const HostingForm = () => {
         roomname: roomInputs.roomname,
         basicCost: roomInputs.basicCost,
         cleanUpCost: roomInputs.cleanUpCost,
-        roomInfo: roomInputs.roomInfo,
-        title: roomInputs.title,
         content: roomInputs.content,
-        checkInStart: checkInStart,
+        facility: facility,
       },
     ];
-    hostPostAxios(hosting);
+    console.log(hosting);
+    // hostPostAxios(hosting);
   };
 
   return (
@@ -132,7 +143,14 @@ const HostingForm = () => {
             ref={roadAddressRef}
             value={roadAddress}
             placeholder="주소를 검색하세요."
-            name="address"
+            name="roadAddress"
+            required
+          />
+          <Input
+            ref={jibunAddressRef}
+            value={jibunAddress}
+            placeholder="주소를 검색하세요."
+            name="jibunAddress"
             required
           />
           <Input
@@ -142,6 +160,7 @@ const HostingForm = () => {
             placeholder="상세주소를 입력하세요."
             required
           />
+
           <AdressSearch result={onAdressChangeHandler} />
           <div className={classes.container}>
             <KaKaoSearchAdress className={classes.map} addr={roadAddress} />
@@ -203,38 +222,53 @@ const HostingForm = () => {
         <hr />
         <section>
           <h1>편의시설</h1>
-        </section>
-        <section>
-          <h3>체크인 시작 날짜</h3>
-          <DatePicker
-            defaultValue={moment(checkInStart, dateFormat)}
-            format={dateFormat}
-            name="availableCheckInDate"
-            onChange={onDateChange}
-          />
+          <Checkbox onChange={onCheckBoxChange} name="tv">
+            TV
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="hairDryer">
+            헤어드라이어
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="fireExtinguisher">
+            소화기
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="refrigerator">
+            냉장고
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="microwave">
+            전자레인지
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="cookware">
+            조리도구
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="aircon">
+            에어컨
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="park">
+            주차장
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="kitchen">
+            부엌
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="wifi">
+            WIFI
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="washingMachine">
+            세탁기
+          </Checkbox>
         </section>
         <hr />
         <section>
-          <h1>숙소 부가 정보</h1>
-          <textarea
-            placeholder="500자 이내로 작성"
-            name="roomInfo"
-            required
-            value={roomInfo}
-            onChange={onInputsChange}
-          />
+          <h1>알아두면 좋은 정보</h1>
+          <Checkbox onChange={onCheckBoxChange} name="selfCheckIn">
+            셀프체크인
+          </Checkbox>
+          <Checkbox onChange={onCheckBoxChange} name="commonSolo">
+            전체를 단독으로 사용
+          </Checkbox>
         </section>
         <hr />
         <section>
           <h1>본문내용</h1>
-          <h3>제목</h3>
-          <Input
-            placeholder="제목을 입력하세요."
-            name="title"
-            required
-            value={title}
-            onChange={onInputsChange}
-          />
           <h3>이미지</h3>
           <ImgCrop rotate>
             <Upload

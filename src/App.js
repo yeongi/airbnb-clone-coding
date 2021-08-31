@@ -179,7 +179,9 @@ const App = () => {
             <Redirect to="/" />
           </Route>
           <Route path="/book/stays/:roomnumber" exact>
-            <BookRoom />
+            <ScrollToTop>
+              <BookRoom />
+            </ScrollToTop>
           </Route>
           <Route path="/wishlists" exact>
             <Wishlists />

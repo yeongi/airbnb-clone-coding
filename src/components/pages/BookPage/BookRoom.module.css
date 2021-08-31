@@ -1,0 +1,68 @@
+.wrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.header-wrapper {
+  display: flex;
+  padding: 10px;
+}
+
+.header-wrapper h1 {
+  padding: 30px;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.header-wrapper span {
+  padding: 30px;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  font-size: 30px;
+  border-radius: 30px;
+  transition: ease-in-out 200ms;
+}
+
+.header-wrapper span:hover {
+  box-shadow: 3px 3px 3px rgb(175, 175, 175);
+}
+
+.container {
+  display: inline-block;
+  width: 65%;
+  height: auto;
+}
+
+.main-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  height: auto;
+  padding: 20px;
+  justify-content: center;
+  text-align: left;
+}
+.main-wrapper h1 {
+  font-weight: bold;
+  font-size: 23px;
+}
+.main-wrapper hr {
+  width: 90%;
+}
+
+.main-wrapper section article {
+  margin: 10px;
+  padding: 20px;
+  height: 300px;
+}
+
+.summary {
+  width: 40%;
+  top: 10rem;
+  height: 400px;
+  padding: 30px;
+  position: sticky;
+  border-radius: 20px;
+  border: 1px solid rgb(199, 199, 199);
+}
