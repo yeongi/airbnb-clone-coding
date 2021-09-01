@@ -1,16 +1,16 @@
 import axios from "axios";
 
 export const RoomAPI = axios.create({
-  baseURL: "https://react-http-training-199ed-default-rtdb.firebaseio.com/",
+  baseURL: "http://192.168.64.1:8080",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export const getRoomAxios = async () => {
+export const getRoomAxios = async (page) => {
   let data;
   try {
-    const response = await RoomAPI.get("/hostlist.json");
+    const response = await RoomAPI.get(`/rooms/page/${page}`);
     data = await response;
   } catch (e) {
     console.log(e);
@@ -21,8 +21,8 @@ export const getRoomAxios = async () => {
 
 export const hostPostAxios = async (data) => {
   try {
-    await RoomAPI.post("/hostlist.json", JSON.stringify(data));
-    console.log("통신 성공!", data);
+    const response = await RoomAPI.post("/rooms/", JSON.stringify(data));
+    console.log("통신 성공!", response);
   } catch (e) {
     console.log(e);
   }

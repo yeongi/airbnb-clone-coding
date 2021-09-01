@@ -112,24 +112,23 @@ const HostingForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const hosting = [
-      {
-        roadAddress: roadAddress,
-        jibunAddress: jibunAddress,
-        category: category,
-        headCount: roomCounter.headCount,
-        numOfBath: roomCounter.numOfBath,
-        numOfBed: roomCounter.numOfBed,
-        detailAddress: roomInputs.detailAddress,
-        roomname: roomInputs.roomname,
-        basicCost: roomInputs.basicCost,
-        cleanUpCost: roomInputs.cleanUpCost,
-        content: roomInputs.content,
-        facility: facility,
-      },
-    ];
+
+    const hosting = {
+      roadAddress: roadAddress.split(" ")[2],
+      jibunAddress: jibunAddress,
+      category: category,
+      headCount: roomCounter.headCount,
+      numOfBath: roomCounter.numOfBath,
+      numOfBed: roomCounter.numOfBed,
+      detailAddress: roomInputs.detailAddress,
+      roomname: roomInputs.roomname,
+      basicCost: roomInputs.basicCost,
+      cleanUpCost: roomInputs.cleanUpCost,
+      content: roomInputs.content,
+      facility: facility,
+    };
     console.log(hosting);
-    // hostPostAxios(hosting);
+    hostPostAxios(hosting);
   };
 
   return (

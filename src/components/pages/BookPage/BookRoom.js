@@ -1,12 +1,18 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import classes from "./BookRoom.module.css";
 
 const BookRoom = () => {
+  const history = useHistory();
+
+  const onBackClick = () => {
+    history.goBack();
+  };
   return (
     <div className={classes.wrapper}>
       <div className={classes.container}>
         <div className={classes["header-wrapper"]}>
-          <span>{"<"}</span>
+          <span onClick={onBackClick}>{"<"}</span>
           <h1>예약요청하기</h1>
         </div>
         <div className={classes["main-wrapper"]}>

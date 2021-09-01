@@ -175,13 +175,13 @@ const App = () => {
           <Route path="/rooms/:roomnumber" exact>
             <RoomPage />
           </Route>
-          <Route path="/airbnb-clone-coding/">
-            <Redirect to="/" />
-          </Route>
           <Route path="/book/stays/:roomnumber" exact>
             <ScrollToTop>
               <BookRoom />
             </ScrollToTop>
+          </Route>
+          <Route path="/airbnb-clone-coding/">
+            <Redirect to="/" />
           </Route>
           <Route path="/wishlists" exact>
             <Wishlists />
@@ -197,6 +197,7 @@ const App = () => {
           </Redirect>
         </MainHeader>
       </Switch>
+
       {isHostFormClicked && (
         <Modal onClose={hostModalCloseHandler}>
           <HostingForm />

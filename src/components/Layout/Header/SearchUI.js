@@ -101,12 +101,16 @@ const SearchUI = (props) => {
   };
 
   const refCounterContainer = useRef(null);
+  let counter = {};
 
   const onCountChange = (state, allCounts) => {
-    setPersonnel(state);
+    counter = state;
+
     const content = `총 ${allCounts} 명`;
     setHeadCount(allCounts);
     refCounterContainer.current.value = content;
+    setPersonnel(counter);
+    console.log(personnel);
   };
 
   const mainHistory = useHistory();
@@ -115,18 +119,23 @@ const SearchUI = (props) => {
     let path;
     e.preventDefault();
     console.log(mainHistory);
-    if (startDate !== undefined) {
+    if (startDate !== undefined && headCount > 1) {
       path = `/search/${locationKeyword}?searchType=default&checkInDate=${moment(
         startDate
       ).format(dateFormat)}&checkOutDate=${moment(endDate).format(
         dateFormat
-      )}&headCount=${headCount}`;
-      mainHistory.push(path);
+      )}&headCount=${headCount}&numOfAdults=${personnel.adult}&numOfChild=${
+        personnel.child
+      }`;
     }
-    if (startDate === undefined) {
-      path = `/search/${locationKeyword}?searchType=default&headCount=${headCount}`;
-      mainHistory.push(path);
+    if (startDate === undefined && headCount > 1) {
+      path = `/search/${locationKeyword}?searchType=default&headCount=${headCount}&numOfAdults=${personnel.adult}&numOfChild=${personnel.child}`;
     }
+    if (startDate === undefined && headCount < 1) {
+      path = `/search/${locationKeyword}?searchType=default`;
+    }
+
+    mainHistory.push(path);
     props.onClose();
   };
 
@@ -138,6 +147,9 @@ const SearchUI = (props) => {
             <PersonnelPicker
               onCountChange={onCountChange}
               closeClickHandler={personnelPickerClickHandler}
+              adult={personnel.adult}
+              child={personnel.child}
+              toddler={personnel.toddler}
             />
           </Overlay>,
           protalElements

@@ -2,34 +2,32 @@ import React, { useReducer } from "react";
 import Counter from "../../UI/Counter";
 import classes from "./PersonnelPicker.module.css";
 
-const initialState = {
-  adult: 0,
-  chidren: 0,
-  toddler: 0,
-};
-
 const pickerReducer = (state, action) => {
   switch (action.type) {
     case "adult_increment":
       return { ...state, adult: state.adult + 1 };
     case "adult_decrement":
       return { ...state, adult: state.adult - 1 };
-    case "chidren_increment":
-      return { ...state, chidren: state.chidren + 1 };
-    case "chidren_decrement":
-      return { ...state, chidren: state.chidren - 1 };
+    case "children_increment":
+      return { ...state, child: state.child + 1 };
+    case "children_decrement":
+      return { ...state, child: state.child - 1 };
     case "toddler_increment":
       return { ...state, toddler: state.toddler + 1 };
     case "toddler_decrement":
       return { ...state, toddler: state.toddler - 1 };
     case "reset":
-      return { adult: 0, chidren: 0, toddler: 0 };
+      return { adult: 0, child: 0, toddler: 0 };
     default:
   }
 };
 
 const PersonnelPicker = (props) => {
-  const [pickerState, dispatchPicker] = useReducer(pickerReducer, initialState);
+  const [pickerState, dispatchPicker] = useReducer(pickerReducer, {
+    adult: props.adult,
+    child: props.child,
+    toddler: 0,
+  });
 
   const adultPlusClickHandler = () => {
     dispatchPicker({ type: "adult_increment" });
@@ -41,13 +39,13 @@ const PersonnelPicker = (props) => {
     }
   };
 
-  const chidrenPlusClickHandler = () => {
-    dispatchPicker({ type: "chidren_increment" });
+  const childrenPlusClickHandler = () => {
+    dispatchPicker({ type: "children_increment" });
   };
 
-  const chidrenMinusClickHandler = () => {
-    if (pickerState.chidren > 0) {
-      dispatchPicker({ type: "chidren_decrement" });
+  const childrenMinusClickHandler = () => {
+    if (pickerState.child > 0) {
+      dispatchPicker({ type: "children_decrement" });
     }
   };
 
@@ -65,8 +63,7 @@ const PersonnelPicker = (props) => {
     dispatchPicker({ type: "reset" });
   };
 
-  const allPerson =
-    pickerState.adult + pickerState.chidren + pickerState.toddler;
+  const allPerson = pickerState.adult + pickerState.child + pickerState.toddler;
 
   props.onCountChange(pickerState, allPerson);
 
@@ -91,9 +88,9 @@ const PersonnelPicker = (props) => {
       <Counter
         label="어린이"
         detail="만 2~12세"
-        value={pickerState.chidren}
-        onPlus={chidrenPlusClickHandler}
-        onMinus={chidrenMinusClickHandler}
+        value={pickerState.child}
+        onPlus={childrenPlusClickHandler}
+        onMinus={childrenMinusClickHandler}
       />
       <hr />
       <Counter

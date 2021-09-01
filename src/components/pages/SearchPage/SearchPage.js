@@ -6,43 +6,43 @@ import { useEffect, useState } from "react";
 import { getRoomAxios } from "../../../API/roomAxios";
 import EXsrc from "../../../asset/exampleHome.jpg";
 import queryString from "query-string";
+
+const DUMMY_ROOMS = [
+  {
+    id: "r1",
+    location: "부산",
+    imgPath: EXsrc,
+    roomname: "용소통나무집",
+    sido: "남해시",
+    gugunmyen: "이동면",
+    address: "부산광역시 강서구 입소정관길 203",
+    category: "통나무집",
+    Headcount: 10,
+    NumOfBed: 2,
+    NumOfBathroom: 2,
+    rating: 4.99,
+    NumOfReview: 71,
+    facility: "에어컨ㆍ주방ㆍ무선 인터넷ㆍ헤어드라이어",
+  },
+];
+
 const SearchPage = (props) => {
   const param = useParams();
-  const [roomList, setRoom] = useState([]);
+  const [roomList, setRoom] = useState(DUMMY_ROOMS);
 
   const location = useLocation();
 
   const query = queryString.parse(location.search);
   console.log(query);
 
-  const DUMMY_ROOMS = [
-    {
-      id: "r1",
-      location: param.keyword,
-      imgPath: EXsrc,
-      roomname: "용소통나무집",
-      sido: "남해시",
-      gugunmyen: "이동면",
-      address: "부산광역시 강서구 입소정관길 203",
-      category: "통나무집",
-      Headcount: 10,
-      NumOfBed: 2,
-      NumOfBathroom: 2,
-      rating: 4.99,
-      NumOfReview: 71,
-      facility: "에어컨ㆍ주방ㆍ무선 인터넷ㆍ헤어드라이어",
-    },
-  ];
-
   useEffect(() => {
     //프로미스 객체
-    const RoomPromise = getRoomAxios();
+    const RoomPromise = getRoomAxios(1);
     RoomPromise.then((response) => {
       //성공 시 데이터를 가져옴
       //data를 배열로 작업하는 함수
-      const list = Object.values(response.data).reduce((acc, cur) => {
-        return acc.concat(cur);
-      });
+      console.log(response);
+      const list = response.data;
       setRoom(list);
       console.log(list);
     });
@@ -88,14 +88,14 @@ const SearchPage = (props) => {
   const SearchedRoomContent = roomList.map((room) => {
     return (
       <SearchedRoom
-        key={room.id}
-        id={room.id}
-        imgPath={EXsrc}
+        key={room.index}
+        id={room.index}
         location={room.location}
         roomTitle={room.title}
+        address={room.jibunAddress}
         sido={room.sido}
-        address={room.address}
         gugunmyen={room.gugunmyen}
+        imgPath={EXsrc}
         category={room.category}
         Headcount={room.headCount}
         NumOfBed={room.numOfBath}
@@ -110,6 +110,8 @@ const SearchPage = (props) => {
         guests={query.headCount}
         checkInDate={query.checkInDate}
         checkOutDate={query.checkOutDate}
+        numOfChild={query.numOfAdults}
+        numOfAdults={query.numOfChild}
       />
     );
   });

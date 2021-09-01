@@ -5,6 +5,7 @@ import { AiTwotoneStar, AiFillHome } from "react-icons/ai";
 import { ImLocation } from "react-icons/im";
 import { FiShare } from "react-icons/fi";
 import { GiSaveArrow } from "react-icons/gi";
+
 const RoomPageHeader = () => {
   return (
     <>

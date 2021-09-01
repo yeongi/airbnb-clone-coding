@@ -57,7 +57,7 @@
 }
 
 .form-wrapper {
-  padding: 4px;
+  padding: 15px;
   border-radius: 10px;
   width: 250px;
   margin-left: 20px;
@@ -66,21 +66,19 @@
 .rate-wrapper {
   display: flex;
   justify-content: space-between;
+  padding: 5px;
 }
 
 .rate-wrapper span {
   font-size: 14px;
   font-weight: bold;
-  padding: 2px;
 }
 
 .rate-wrapper p {
   font-size: 17px;
-  padding: 2px;
 }
 .rate {
   font-size: 17px;
-  padding: 3px;
 }
 
 .room-feature {

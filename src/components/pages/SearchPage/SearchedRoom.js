@@ -9,9 +9,21 @@ const SearchedRoom = (props) => {
   const AuthCtx = useContext(AuthContext);
   const history = useHistory();
   const MoveToRoomDetailHandler = () => {
-    history.push(
-      `/rooms/${props.id}?guests=${props.guests}&checkInDate=${props.checkInDate}&checkOutDate=${props.checkOutDate}`
-    );
+    let guests = props.guests;
+    let content = "";
+    if (guests === undefined) {
+      content = `guests=${1}`;
+    } else {
+      content = `guests=${guests}&numOfChild=${props.numOfChild}&numOfAdults=${props.numOfAdults}
+      `;
+    }
+    if (props.checkInDate) {
+      history.push(
+        `/rooms/${props.id}?${content}&checkInDate=${props.checkInDate}&checkOutDate=${props.checkOutDate}`
+      );
+    } else {
+      history.push(`/rooms/${props.id}?${content}`);
+    }
   };
 
   const wishlistAddHandler = () => {
@@ -29,6 +41,10 @@ const SearchedRoom = (props) => {
     console.log(props.address);
   };
 
+  // const [sido, sigungu] = props.address.split(" ");
+
+  const [sido, sigungu] = ["1", "2"];
+
   return (
     <>
       <hr />
@@ -39,7 +55,7 @@ const SearchedRoom = (props) => {
         <img alt=" " src={props.imgPath} onClick={MoveToRoomDetailHandler} />
         <div className={classes.container} onClick={MoveToRoomDetailHandler}>
           <div className={classes.location}>
-            {props.gugunmyen} , {props.sido} 의 {props.category}
+            {sigungu} , {sido} 의 {props.category}
           </div>
           <div className={classes["room-title"]}>{props.roomTitle}</div>
           <hr />

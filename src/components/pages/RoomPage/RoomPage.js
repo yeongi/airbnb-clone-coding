@@ -18,15 +18,36 @@ const RoomPage = () => {
   const [stempsrc, settempsrc] = useState();
 
   let roomJson = null;
+  let tempOB = {};
+
+  if (query.guests === "1") {
+    tempOB = {
+      guests: 1,
+      adult: 1,
+      child: 0,
+      checkIn: query.checkInDate,
+      checkOut: query.checkOutDate,
+    };
+  } else {
+    tempOB = {
+      guests: query.guests,
+      checkIn: query.checkInDate,
+      checkOut: query.checkOutDate,
+      adult: query.numOfAdults,
+      child: query.numOfChild === undefined ? 0 : query.numOfChild,
+    };
+  }
 
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <RoomPageHeader />
         <RoomPageMain
-          guests={query.guests}
-          checkIn={query.checkInDate}
-          checkOut={query.checkOutDate}
+          guests={tempOB.guests}
+          checkIn={tempOB.checkInDate}
+          checkOut={tempOB.checkOutDate}
+          adult={tempOB.adult}
+          child={tempOB.child}
         />
       </div>
       {stempsrc}

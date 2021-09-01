@@ -6,26 +6,49 @@ import { VscKey } from "react-icons/vsc";
 import { BiBed } from "react-icons/bi";
 import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
 import { Button, Input, DatePicker } from "antd";
-import { Link, useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import React, { useRef, useState } from "react";
 import moment from "moment";
+import queryString from "query-string";
+import { enumerateDaysBetweenDates } from "../../../Lib/momentLib";
+import PersonnelPicker from "../../Layout/Header/PersonnelPicker";
 
 const { RangePicker } = DatePicker;
 
-const dateFormat = "YYYY/MM/DD";
+//요금 상수
+const cleanUpCost = 10000;
+const basicCost = 100000;
+
+const dateFormat = "YYYY-MM-DD";
+
+//날짜 선택 검사
 let dateSelected = false;
+
+//URL 뽑아오기
+const curURL = decodeURI(window.location.href);
+const search = curURL.split("?")[1];
+
 const RoomPageMain = (props) => {
+  const query = queryString.parse();
+
+  const [isCounterClicked, setClicked] = useState(false);
+  const [guests, setGuests] = useState(props.guests);
+  const [usingDate, setDate] = useState([]);
+  const [personnel, setPersonnel] = useState({
+    adult: props.adult,
+    child: props.child,
+    toddler: 0,
+  });
+
   let initailState = {
     checkIn: moment(new Date(), dateFormat),
     checkOut: moment(new Date(), dateFormat),
-    guests: props.guests,
   };
 
-  if (props.checkIn !== "undefined") {
+  if (props.checkIn !== undefined) {
     initailState = {
       checkIn: moment(props.checkIn, dateFormat),
       checkOut: moment(props.checkOut, dateFormat),
-      guests: props.guests,
     };
 
     dateSelected = true;
@@ -39,27 +62,55 @@ const RoomPageMain = (props) => {
     console.log(history);
   };
 
-  let guestsContent;
-
-  if (props.guests === "undefined") {
-    guestsContent = "게스트를 선택해 주세요.";
-  } else {
-    console.log(props.guests);
-    guestsContent = `게스트 ${props.guests}명`;
-  }
-
   const pickerChangeHandler = (e) => {
     console.log(e);
     dateSelected = true;
-    setState((prev) => {
-      return {
-        ...prev,
-        checkIn: e[0],
-        checkOut: e[1],
-      };
+    setState({
+      checkIn: e[0],
+      checkOut: e[1],
     });
+
+    setDate(
+      enumerateDaysBetweenDates(bookingState.checkIn, bookingState.checkOut)
+    );
     console.log(bookingState);
   };
+
+  //카운터 함수
+  const onCountChange = (state, allCounts) => {
+    setPersonnel(state);
+    setGuests(allCounts);
+    console.log(personnel);
+  };
+
+  const onCounterClicked = () => {
+    if (isCounterClicked) {
+      setClicked(false);
+    } else {
+      setClicked(true);
+    }
+  };
+  const content = `총 ${guests} 명`;
+  const formContent = (
+    <>
+      <div className={classes["rate-wrapper"]}>
+        <span>1박 * 게스트 (명)</span>
+        <p>
+          ￦<strong>{basicCost * guests * usingDate.length} </strong>
+          (원)
+        </p>
+      </div>
+      <div className={classes["rate-wrapper"]}>
+        <span>청소비</span>
+        <p>￦{cleanUpCost} (원)</p>
+      </div>
+      <span className={classes.rate}>
+        <b>총 금액 : </b> ￦
+        <strong>{cleanUpCost + basicCost * guests * usingDate.length}</strong>
+        (원)
+      </span>
+    </>
+  );
 
   return (
     <>
@@ -168,31 +219,40 @@ const RoomPageMain = (props) => {
               <Input
                 type="text"
                 placeholder="게스트 1명"
-                value={guestsContent}
+                value={content}
+                onClick={onCounterClicked}
               />
             </div>
-
-            <div className={classes["rate-wrapper"]}>
-              <span>청소비</span>
-              <p>￦ 청소비용얼마 (원)</p>
-            </div>
-            <div className={classes["rate-wrapper"]}>
-              <span>1박 * 게스트 (명)</span>
-              <p>￦ 숙박 비용 얼마 (원)</p>
-            </div>
-            <span className={classes.rate}>
-              <b>총 금액 : </b> 1박 * 게스트 + 청소비(원)
-            </span>
+            {dateSelected && formContent}
             <Button type="primary" block htmlType="submit">
               <Link to={`/book/stays/s`}>예약하기</Link>
             </Button>
           </form>
+          {isCounterClicked && (
+            <PersonnelPicker
+              onCountChange={onCountChange}
+              adult={props.adult}
+              child={props.child}
+              closeClickHandler={onCounterClicked}
+            />
+          )}
         </aside>
       </div>
       <section className={classes["footer"]}>
         <hr />
         <article>
           <h1>후기 블록</h1>
+          <div>
+            <div>이미지</div>
+            <p>이 호스트의 숙소에 대한 후기가 아직 없습니다.</p>
+          </div>
+          <div>
+            <div>이미지</div>
+            <p>
+              여행에 차질이 없도록 최선을 다해 도와드리겠습니다. 모든 예약은{" "}
+              <b>에어비엔비의 게스트 환불 정책</b>에 따라 보호를 받습니다.
+            </p>
+          </div>
         </article>
         <hr />
         <article>
