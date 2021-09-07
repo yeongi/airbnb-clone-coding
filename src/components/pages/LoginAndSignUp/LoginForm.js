@@ -4,6 +4,7 @@ import { Button, Input } from "antd";
 import "antd/dist/antd.css";
 import AuthContext from "../../../store/auth-context";
 import { signInPostAxios } from "../../../API/userAxios";
+import { getLog } from "../../../API/temp";
 
 const LoginForm = (props) => {
   const userId = useRef("");
@@ -13,29 +14,22 @@ const LoginForm = (props) => {
   const loginHandler = () => {
     console.log("로그인 검사중...");
     //로그인 함수
-    console.log(userId.current.state.value, userPw.current.state.value);
 
-    const res = signInPostAxios(
-      userId.current.state.value,
-      userPw.current.state.value
-    )
+    signInPostAxios(userId.current.state.value, userPw.current.state.value)
       .then((res) => {
         console.log(res);
-        if (res.data.email === userId.current.state.value) {
-          AuthCtx.onLogIn();
+        if (res.status === 200) {
+          console.log(AuthCtx.email);
+          AuthCtx.onLogIn(userId.current.state.value);
           props.onClose();
           alert("로그인 성공..!");
         } else {
           alert("로그인 실패...");
         }
-        return res;
       })
       .then((error) => {
-        console.log(error);
-        alert("로그인 실패" + error);
-        return error;
+        // console.log("에러" + error);
       });
-    console.log(res);
   };
   return (
     <div className={classes.wrapper}>

@@ -19,7 +19,6 @@ import Wishlists from "./components/pages/Wishlists";
 import Trips from "./components/pages/Trips";
 import Account from "./components/pages/Account";
 import BookRoom from "./components/pages/BookPage/BookRoom";
-import MiniHeader from "./components/Layout/MiniHeader";
 
 //회원가입 로그인 모달창 상태
 const initialModalFormState = {

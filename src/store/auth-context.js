@@ -3,35 +3,43 @@ import React, { useEffect, useState } from "react";
 const AuthContext = React.createContext({
   //default 형태를 지정
   isLoggedIn: false,
+  email: "",
   onLogOut: () => {},
   onLogIn: (email, password) => {},
 });
 
 export const AuthContextProvider = (props) => {
   //state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState({
+    login: false,
+    email: "",
+  });
 
   const logoutHandler = () => {
-    setIsLoggedIn(false);
+    setIsLoggedIn(() => {
+      return { login: false, email: "" };
+    });
   };
 
-  const logInHandler = () => {
-    setIsLoggedIn(true);
+  const logInHandler = (id) => {
+    setIsLoggedIn(() => {
+      return { login: true, email: id };
+    });
   };
 
-  //페이지가 렌더링 될때 세션을 확인 하는 로직
+  //페이지가 렌더링 될때 로그인을 확인 하는 로직
   useEffect(() => {
-    const session = true;
-    //로그인을 확인하는 로직
-    if (session) {
-      setIsLoggedIn(true);
-    }
+    // 로그인을 어떻게 확인해야 할까??
+    setIsLoggedIn(() => {
+      return { login: true, email: "cbg5255@gmail.com" };
+    });
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn: isLoggedIn,
+        isLoggedIn: isLoggedIn.login,
+        email: isLoggedIn.email,
         onLogIn: logInHandler,
         onLogOut: logoutHandler,
       }}

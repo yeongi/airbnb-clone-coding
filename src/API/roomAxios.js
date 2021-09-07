@@ -11,7 +11,7 @@ export const getRoomAxios = async (page) => {
   let data;
   try {
     const response = await RoomAPI.get(`/rooms/page/${page}`);
-    data = await response;
+    data = response;
   } catch (e) {
     console.log(e);
   }

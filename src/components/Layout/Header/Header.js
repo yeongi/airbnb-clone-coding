@@ -26,6 +26,8 @@ const Header = (props) => {
 
   const authCtx = useContext(AuthContext);
 
+  console.log(authCtx);
+
   const menuClickHandler = () => {
     setUserMenuClicked(true);
   };

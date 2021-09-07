@@ -7,11 +7,12 @@ import { BiBed } from "react-icons/bi";
 import KaKaoSearchAdress from "../../KaKaoMap/KaKaoSearchAdress";
 import { Button, Input, DatePicker } from "antd";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import queryString from "query-string";
 import { enumerateDaysBetweenDates } from "../../../Lib/momentLib";
 import PersonnelPicker from "../../Layout/Header/PersonnelPicker";
+import { postBookAxios } from "../../../API/bookAxios";
 
 const { RangePicker } = DatePicker;
 
@@ -57,9 +58,17 @@ const RoomPageMain = (props) => {
   const [bookingState, setState] = useState(initailState);
 
   const history = useHistory();
+
   const onSubmitHandler = (e) => {
+    //결재페이지로 이동.
     e.preventDefault();
-    console.log(history);
+    //postBookAxios(roomIndex,data);
+    postBookAxios(2, {
+      checkinDate: bookingState.checkIn,
+      checkoutDate: bookingState.checkOut,
+      adult: "2",
+      child: "1",
+    });
   };
 
   const pickerChangeHandler = (e) => {
@@ -73,14 +82,12 @@ const RoomPageMain = (props) => {
     setDate(
       enumerateDaysBetweenDates(bookingState.checkIn, bookingState.checkOut)
     );
-    console.log(bookingState);
   };
 
   //카운터 함수
   const onCountChange = (state, allCounts) => {
     setPersonnel(state);
     setGuests(allCounts);
-    console.log(personnel);
   };
 
   const onCounterClicked = () => {
@@ -94,9 +101,9 @@ const RoomPageMain = (props) => {
   const formContent = (
     <>
       <div className={classes["rate-wrapper"]}>
-        <span>1박 * 게스트 (명)</span>
+        <span>1박 비용</span>
         <p>
-          ￦<strong>{basicCost * guests * usingDate.length} </strong>
+          ￦<strong>{basicCost} </strong>
           (원)
         </p>
       </div>
@@ -106,7 +113,7 @@ const RoomPageMain = (props) => {
       </div>
       <span className={classes.rate}>
         <b>총 금액 : </b> ￦
-        <strong>{cleanUpCost + basicCost * guests * usingDate.length}</strong>
+        <strong>{cleanUpCost + basicCost * usingDate.length}</strong>
         (원)
       </span>
     </>
@@ -224,9 +231,11 @@ const RoomPageMain = (props) => {
               />
             </div>
             {dateSelected && formContent}
-            <Button type="primary" block htmlType="submit">
-              <Link to={`/book/stays/s`}>예약하기</Link>
-            </Button>
+            {dateSelected && (
+              <Button type="primary" block htmlType="submit">
+                a{/* <Link to={`/book/stays/s`}>예약하기</Link> */}
+              </Button>
+            )}
           </form>
           {isCounterClicked && (
             <PersonnelPicker

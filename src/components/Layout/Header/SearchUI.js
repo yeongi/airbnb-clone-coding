@@ -180,7 +180,6 @@ const SearchUI = (props) => {
                 onChange={onChangeKewordHandler}
                 onClick={locationSearchHandler}
                 value={locationKeyword}
-                required
                 autoFocus
               />
             </section>

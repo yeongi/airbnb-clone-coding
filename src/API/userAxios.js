@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const SignUpAPI = axios.create({
+export const API = axios.create({
   // baseURL: "https://react-http-training-199ed-default-rtdb.firebaseio.com",
   baseURL: "http://192.168.63.160:8080",
   headers: {
@@ -10,7 +10,7 @@ export const SignUpAPI = axios.create({
 
 export const userSignUpPostAxios = async (user) => {
   try {
-    await SignUpAPI.post("/signUp", JSON.stringify(user));
+    await API.post("/signUp", JSON.stringify(user));
     console.log("통신 성공!", user);
   } catch (e) {
     console.log(e);
@@ -19,7 +19,7 @@ export const userSignUpPostAxios = async (user) => {
 
 export const signInPostAxios = async (userId, userPW) => {
   try {
-    const response = await SignUpAPI.post("/signIn", {
+    const response = await API.post("/signIn", {
       email: userId,
       password: userPW,
     });

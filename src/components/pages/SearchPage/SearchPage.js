@@ -42,9 +42,9 @@ const SearchPage = (props) => {
       //성공 시 데이터를 가져옴
       //data를 배열로 작업하는 함수
       console.log(response);
-      const list = response.data;
-      setRoom(list);
-      console.log(list);
+      // const list = response.data;
+      // setRoom(list);
+      // console.log(list);
     });
   }, []);
 

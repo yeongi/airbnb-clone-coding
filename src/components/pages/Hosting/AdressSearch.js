@@ -1,11 +1,8 @@
-import { Button, Input } from "antd";
-import { useRef, useState } from "react";
+import { Button } from "antd";
 
 const { daum } = window;
 
 const AdressSearch = (props) => {
-  const [address, setAddress] = useState();
-
   function sample4_execDaumPostcode() {
     new daum.Postcode({
       oncomplete: function (data) {
