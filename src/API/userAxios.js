@@ -2,10 +2,11 @@ import axios from "axios";
 
 export const API = axios.create({
   // baseURL: "https://react-http-training-199ed-default-rtdb.firebaseio.com",
-  baseURL: "http://192.168.63.160:8080",
+  baseURL: "http://192.168.64.1:8080",
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 export const userSignUpPostAxios = async (user) => {

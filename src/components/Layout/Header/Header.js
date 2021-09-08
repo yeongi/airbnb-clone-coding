@@ -12,6 +12,7 @@ import ProfileModal from "../../UI/ProfileModal";
 import { Link } from "react-router-dom";
 import SearchUI from "./SearchUI";
 import AuthContext from "../../../store/auth-context";
+import axios from "axios";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onClose}></div>;

@@ -7,15 +7,16 @@ export const RoomAPI = axios.create({
   },
 });
 
-export const getRoomAxios = async (page) => {
+export const getRoomAxios = async (page, location) => {
   let data;
+  //get에서는 바디를 쓸 수 없다.
   try {
     const response = await RoomAPI.get(`/rooms/page/${page}`);
-    data = response;
+    console.log(response);
+    data = await response;
   } catch (e) {
     console.log(e);
   }
-
   return data;
 };
 
@@ -23,6 +24,15 @@ export const hostPostAxios = async (data) => {
   try {
     const response = await RoomAPI.post("/rooms/", JSON.stringify(data));
     console.log("통신 성공!", response);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const roomIndexAxios = async (url) => {
+  try {
+    const response = await RoomAPI.get(url);
+    return response;
   } catch (e) {
     console.log(e);
   }

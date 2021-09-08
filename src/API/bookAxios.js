@@ -1,10 +1,12 @@
 import axios from "axios";
+import { getCookie } from "../Lib/cookies";
 
 export const API = axios.create({
-  baseURL: "http://192.168.63.160:8080",
+  baseURL: "http://192.168.64.1:8080",
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 export const postBookAxios = async (roomIndex, data) => {

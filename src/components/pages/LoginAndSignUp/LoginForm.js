@@ -5,6 +5,7 @@ import "antd/dist/antd.css";
 import AuthContext from "../../../store/auth-context";
 import { signInPostAxios } from "../../../API/userAxios";
 import { getLog } from "../../../API/temp";
+import { setCookie } from "../../../Lib/cookies";
 
 const LoginForm = (props) => {
   const userId = useRef("");
@@ -18,8 +19,21 @@ const LoginForm = (props) => {
     signInPostAxios(userId.current.state.value, userPw.current.state.value)
       .then((res) => {
         console.log(res);
-        if (res.status === 200) {
+        if (
+          res.status === 200 &&
+          res.data.email === userId.current.state.value
+        ) {
           console.log(AuthCtx.email);
+
+          //쿠키로 토큰 저장
+          setCookie("JSESSIONID", res.data.token, {
+            Domain: "192.168.64.1",
+            Path: "/",
+            Expires: "Session",
+            HttpOnly: true,
+            Secure: false,
+          });
+
           AuthCtx.onLogIn(userId.current.state.value);
           props.onClose();
           alert("로그인 성공..!");

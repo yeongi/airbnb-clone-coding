@@ -9,20 +9,15 @@ import queryString from "query-string";
 
 const DUMMY_ROOMS = [
   {
-    id: "r1",
-    location: "부산",
-    imgPath: EXsrc,
-    roomname: "용소통나무집",
-    sido: "남해시",
-    gugunmyen: "이동면",
-    address: "부산광역시 강서구 입소정관길 203",
-    category: "통나무집",
-    Headcount: 10,
-    NumOfBed: 2,
-    NumOfBathroom: 2,
-    rating: 4.99,
-    NumOfReview: 71,
-    facility: "에어컨ㆍ주방ㆍ무선 인터넷ㆍ헤어드라이어",
+    addressIndex: 43,
+    categoryIndex: 40,
+    cleanPrice: 123123,
+    content: "123123",
+    maxPerson: 1,
+    name: "123",
+    price: 123,
+    roomIndex: 82,
+    userIndex: 10,
   },
 ];
 
@@ -39,28 +34,14 @@ const SearchPage = (props) => {
     //프로미스 객체
     const RoomPromise = getRoomAxios(1);
     RoomPromise.then((response) => {
-      //성공 시 데이터를 가져옴
-      //data를 배열로 작업하는 함수
-      console.log(response);
-      // const list = response.data;
-      // setRoom(list);
-      // console.log(list);
+      // 성공 시 데이터를 가져옴
+      // data를 배열로 작업하는 함수
+      console.log("응답", response);
+      const list = response.data;
+      setRoom(list);
+      console.log(list);
     });
   }, []);
-
-  // const axiosGetHandler = () => {
-  //   //프로미스 객체
-  //   const RoomPromise = getRoomAxios();
-  //   RoomPromise.then((response) => {
-  //     //성공 시 데이터를 가져옴
-  //     //data를 배열로 작업하는 함수
-  //     const list = Object.values(response.data).reduce((acc, cur) => {
-  //       return acc.concat(cur);
-  //     });
-  //     setRoom(list);
-  //     console.log(list);
-  //   });
-  // };
 
   const [curFocusingAddr, setFocusAddr] = useState(DUMMY_ROOMS[0].address);
 
@@ -88,23 +69,18 @@ const SearchPage = (props) => {
   const SearchedRoomContent = roomList.map((room) => {
     return (
       <SearchedRoom
-        key={room.index}
-        id={room.index}
-        location={room.location}
-        roomTitle={room.title}
-        address={room.jibunAddress}
-        sido={room.sido}
-        gugunmyen={room.gugunmyen}
+        key={room.roomIndex}
+        id={room.roomIndex}
+        categoryIndex={room.categoryIndex}
+        roomTitle={room.name}
+        addressIndex={room.addressIndex}
         imgPath={EXsrc}
         category={room.category}
-        Headcount={room.headCount}
-        NumOfBed={room.numOfBath}
-        NumOfBathroom={room.numOfBed}
+        Headcount={room.maxPerson}
         // rating={room.rating}
         // NumOfReview={room.NumOfReview}
         rating="3.11"
         NumOfReview="100"
-        facility={room.facility}
         onLogin={props.onLogin}
         getCurAddr={curFocusAddrHandler}
         guests={query.headCount}
