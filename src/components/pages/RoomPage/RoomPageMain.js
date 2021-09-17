@@ -17,22 +17,12 @@ import { getCookie } from "../../../Lib/cookies";
 
 const { RangePicker } = DatePicker;
 
-//요금 상수
-const cleanUpCost = 10000;
-const basicCost = 100000;
-
 const dateFormat = "YYYY-MM-DD";
 
 //날짜 선택 검사
 let dateSelected = false;
 
-//URL 뽑아오기
-const curURL = decodeURI(window.location.href);
-const search = curURL.split("?")[1];
-
 const RoomPageMain = (props) => {
-  const query = queryString.parse();
-
   const [isCounterClicked, setClicked] = useState(false);
   const [guests, setGuests] = useState(props.guests);
   const [usingDate, setDate] = useState([]);
@@ -104,17 +94,19 @@ const RoomPageMain = (props) => {
       <div className={classes["rate-wrapper"]}>
         <span>1박 비용</span>
         <p>
-          ￦<strong>{basicCost} </strong>
+          ￦<strong>{props.basicCost} </strong>
           (원)
         </p>
       </div>
       <div className={classes["rate-wrapper"]}>
         <span>청소비</span>
-        <p>￦{cleanUpCost} (원)</p>
+        <p>￦{props.cleanUpCost} (원)</p>
       </div>
       <span className={classes.rate}>
         <b>총 금액 : </b> ￦
-        <strong>{cleanUpCost + basicCost * usingDate.length}</strong>
+        <strong>
+          {props.cleanUpCost + props.basicCost * usingDate.length}
+        </strong>
         (원)
       </span>
     </>
@@ -126,9 +118,14 @@ const RoomPageMain = (props) => {
         <div className={classes["room-detail"]}>
           <section className={classes["room-title"]}>
             <article>
-              <span> May님이 호스팅하는 공동 주택 전체</span>
+              <span>
+                호스트번호{props.host}님이 호스팅하는 {props.categoryIndex} 전체
+              </span>
               <br />
-              <label>최대 인원 4명, · 침실 1개, · 침대 1개, · 욕실 1개</label>
+              <label>
+                최대 인원 {props.headCount}명, · 침실 1개, · 침대 {props.bed}개,
+                · 욕실 {props.bath}개
+              </label>
             </article>
             <img src={tempprofile} alt=" " />
           </section>
@@ -178,14 +175,7 @@ const RoomPageMain = (props) => {
             <hr />
             <article>
               <h1>숙소 정보</h1>
-              <p>내집처럼 편안하고 아늑하게 힐링 하세요 :)</p>
-              <b>
-                ※코로나19에 대비하여 매번 깨끗이 '살균소독 방역' 하고 있습니다
-              </b>
-              <p>- 제 프로필을 눌러서 다른 숙소도 구경하세요^^</p>
-              <p>
-                - 얼리체크인(오후 2시 이후 가능) 원하실 경우 미리 말씀해 주세요
-              </p>
+              {props.content}
             </article>
             <hr />
             <article>
@@ -193,18 +183,10 @@ const RoomPageMain = (props) => {
               <div className={classes.bedroom}>
                 <BiBed />
                 <h3>침실</h3>
-                <span>퀸사이즈 침대 1개</span>
+                <span>퀸사이즈 침대 {props.bed}개</span>
               </div>
             </article>
             <hr />
-            <article>
-              <h1>숙소 편의 시설</h1>
-            </article>
-            <hr />
-            <article>
-              <h2>체크인 날짜를 선택해 주세요.</h2>
-              <form></form>
-            </article>
           </section>
         </div>
         <aside className={classes["rate-form"]}>
@@ -219,9 +201,13 @@ const RoomPageMain = (props) => {
               <RangePicker
                 format={dateFormat}
                 placeholder={["체크인 날짜", "체크아웃 날짜"]}
+                order
                 value={
                   dateSelected && [bookingState.checkIn, bookingState.checkOut]
                 }
+                disabledDate={(currnet) => {
+                  return currnet & (currnet < moment().endOf("day"));
+                }}
                 onChange={pickerChangeHandler}
               />
               <Input
@@ -267,18 +253,33 @@ const RoomPageMain = (props) => {
         <hr />
         <article>
           <h1>호스팅 지역</h1>
+          <b>
+            {props.sido},{props.sigungu}
+          </b>
+
+          <p>
+            대략적인 위치만 나타납니다. 상세 주소는 예약을 하시면 알 수
+            있습니다.
+          </p>
           <KaKaoSearchAdress
             className={classes.map}
-            addr={"부산광역시 강서구 입소정관길 203"}
+            addr={`${props.sido} ${props.sigungu}`}
           />
+          {props.address}
         </article>
         <hr />
         <article>
           <h1>호스트 정보</h1>
+          <h1>
+            <b>호스트 시작 날짜</b>
+          </h1>
+          <p>{props.hostStartDate}</p>
+          부터 시작 했습니다.
         </article>
         <hr />
         <article>
           <h1>알아두어야 할 사항</h1>
+          <p>이 호스트를 후원해 주세요.</p>
         </article>
         <hr />
       </section>

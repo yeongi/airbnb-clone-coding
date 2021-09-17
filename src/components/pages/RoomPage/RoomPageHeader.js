@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./RoomPageHeader.module.css";
-import src from "../../../asset/category/category1.jpg";
+import temp from "../../../asset/loading.gif";
 import { AiTwotoneStar, AiFillHome } from "react-icons/ai";
 import { ImLocation } from "react-icons/im";
 import { FiShare } from "react-icons/fi";
 import { GiSaveArrow } from "react-icons/gi";
 
-const RoomPageHeader = () => {
+const RoomPageHeader = (props) => {
+  console.log(props.img);
+  const [imgsrc, setSrc] = useState([]);
+
+  useEffect(() => {
+    if (props.img.length) {
+      setSrc(props.img);
+    }
+  }, [props.img]);
+
   return (
     <>
-      <h2 className={classes["room-name"]}>
-        [3]NEW!!야외 테라스 느낌
-        원목테이블#이태리감성#셀프체크인#무료넷플릭스[살균소독]
-      </h2>
+      <h2 className={classes["room-name"]}>{props.name}</h2>
       <nav className={classes["room-features"]}>
         <div className={classes["flex-item"]}>
           <div>
@@ -22,7 +28,7 @@ const RoomPageHeader = () => {
 
           <div>
             <ImLocation className={classes["header-icon"]} />
-            주소 지역
+            {props.addressIndex}
           </div>
           <div>
             <AiFillHome className={classes["header-icon"]} />
@@ -41,15 +47,11 @@ const RoomPageHeader = () => {
         </div>
       </nav>
       <div className={classes["room-img"]}>
-        <img src={src} alt="" className={classes["main-img"]} />
-        <div className={classes["side-img"]}>
-          <img src={src} alt="" />
-          <img src={src} alt="" />
-        </div>
-        <div className={classes["side-img"]}>
-          <img src={src} alt="" />
-          <img src={src} alt="" />
-        </div>
+        <img
+          src={imgsrc.length ? imgsrc[0].imagePath : temp}
+          alt=""
+          className={classes["main-img"]}
+        />
       </div>
     </>
   );

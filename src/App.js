@@ -172,7 +172,9 @@ const App = () => {
             </ScrollToTop>
           </Route>
           <Route path="/rooms/:roomnumber" exact>
-            <RoomPage />
+            <ScrollToTop>
+              <RoomPage />
+            </ScrollToTop>
           </Route>
           <Route path="/book/stays/:roomnumber" exact>
             <ScrollToTop>

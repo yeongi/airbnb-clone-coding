@@ -36,6 +36,8 @@ const HostingForm = () => {
     commonSolo: false,
   });
 
+  const [isSended, setSend] = useState(false);
+
   const onCheckBoxChange = (checkedValues) => {
     const { checked, name } = checkedValues.target;
     setChecked((prevState) => {
@@ -44,6 +46,7 @@ const HostingForm = () => {
     console.log(facility);
   };
 
+  const [roomnum, setRoom] = useState(0);
   //제어 컴포넌트 state
   const [roomInputs, setInputs] = useState({
     detailAddress: "",
@@ -87,7 +90,7 @@ const HostingForm = () => {
       uid: "-1",
       name: "image.png",
       status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      url: "http://localhost:8080/rooms/2/images",
     },
   ]);
 
@@ -128,150 +131,178 @@ const HostingForm = () => {
       facility: facility,
     };
     console.log(hosting);
-    hostPostAxios(hosting);
+    hostPostAxios(hosting).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        console.log(res);
+        setRoom(res.data);
+      }
+    });
+    setSend(true);
   };
 
   return (
     <div className={classes.wrapper}>
       <h1>호스팅 신청하기</h1>
       <hr />
-      <form onSubmit={submitHandler} autoComplete="off">
-        <section>
-          <h1>주소를 선택하세요.</h1>
-          <Input
-            ref={roadAddressRef}
-            value={roadAddress}
-            placeholder="주소를 검색하세요."
-            name="roadAddress"
-            required
-          />
-          <Input
-            ref={jibunAddressRef}
-            value={jibunAddress}
-            placeholder="주소를 검색하세요."
-            name="jibunAddress"
-            required
-          />
-          <Input
-            name="detailAddress"
-            value={detailAddress}
-            onChange={onInputsChange}
-            placeholder="상세주소를 입력하세요."
-            required
-          />
+      {!isSended && (
+        <form onSubmit={submitHandler} autoComplete="off">
+          <section>
+            <h1>주소를 선택하세요.</h1>
+            <Input
+              ref={roadAddressRef}
+              value={roadAddress}
+              placeholder="주소를 검색하세요."
+              name="roadAddress"
+              required
+            />
+            <Input
+              ref={jibunAddressRef}
+              value={jibunAddress}
+              placeholder="주소를 검색하세요."
+              name="jibunAddress"
+              required
+            />
+            <Input
+              name="detailAddress"
+              value={detailAddress}
+              onChange={onInputsChange}
+              placeholder="상세주소를 입력하세요."
+              required
+            />
 
-          <AdressSearch result={onAdressChangeHandler} />
-          <div className={classes.container}>
-            <KaKaoSearchAdress className={classes.map} addr={roadAddress} />
-          </div>
-        </section>
-        <hr />
-        <section>
-          <h1>카테고리</h1>
-          <Radio.Group
-            onChange={onCategoryChange}
-            value={category}
-            name="category"
-          >
-            <Radio value="housing">주택</Radio>
-            <Radio value="apartment">아파트</Radio>
-            <Radio value="rentalCottage">팬션</Radio>
-            <Radio value="poolVilla">풀빌라</Radio>
-          </Radio.Group>
-        </section>
-        <hr />
-        <section>
-          <h1>숙소이름</h1>
-          <Input
-            placeholder="숙소이름을 입력해주세요."
-            name="roomname"
-            value={roomname}
-            onChange={onInputsChange}
-            required
-          />
-        </section>
-        <hr />
-        <section>
-          <h1>기본요금,청소비용</h1>
-          <label>기본요금</label>
-          <Input
-            placeholder="기본요금을 입력해주세요."
-            name="basicCost"
-            value={basicCost}
-            onChange={onInputsChange}
-            required
-          />
-          <label>청소비용</label>
-          <Input
-            placeholder="청소비용을 입력해주세요."
-            name="cleanUpCost"
-            value={cleanUpCost}
-            onChange={onInputsChange}
-            required
-          />
-        </section>
-        <hr />
-        <section>
-          <h1>숙소 기본 정보</h1>
-          <RoomInfoCount
-            value={roomCounter}
-            onCounterChange={onCounterChange}
-          />
-        </section>
-        <hr />
-        <section>
-          <h1>편의시설</h1>
-          <Checkbox onChange={onCheckBoxChange} name="tv">
-            TV
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="hairDryer">
-            헤어드라이어
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="fireExtinguisher">
-            소화기
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="refrigerator">
-            냉장고
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="microwave">
-            전자레인지
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="cookware">
-            조리도구
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="aircon">
-            에어컨
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="park">
-            주차장
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="kitchen">
-            부엌
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="wifi">
-            WIFI
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="washingMachine">
-            세탁기
-          </Checkbox>
-        </section>
-        <hr />
-        <section>
-          <h1>알아두면 좋은 정보</h1>
-          <Checkbox onChange={onCheckBoxChange} name="selfCheckIn">
-            셀프체크인
-          </Checkbox>
-          <Checkbox onChange={onCheckBoxChange} name="commonSolo">
-            전체를 단독으로 사용
-          </Checkbox>
-        </section>
-        <hr />
-        <section>
-          <h1>본문내용</h1>
+            <AdressSearch result={onAdressChangeHandler} />
+            <div className={classes.container}>
+              <KaKaoSearchAdress className={classes.map} addr={roadAddress} />
+            </div>
+          </section>
+          <hr />
+          <section>
+            <h1>카테고리</h1>
+            <Radio.Group
+              onChange={onCategoryChange}
+              value={category}
+              name="category"
+            >
+              <Radio value="housing">주택</Radio>
+              <Radio value="apartment">아파트</Radio>
+              <Radio value="rentalCottage">팬션</Radio>
+              <Radio value="poolVilla">풀빌라</Radio>
+            </Radio.Group>
+          </section>
+          <hr />
+          <section>
+            <h1>숙소이름</h1>
+            <Input
+              placeholder="숙소이름을 입력해주세요."
+              name="roomname"
+              value={roomname}
+              onChange={onInputsChange}
+              required
+            />
+          </section>
+          <hr />
+          <section>
+            <h1>기본요금,청소비용</h1>
+            <label>기본요금</label>
+            <Input
+              placeholder="기본요금을 입력해주세요."
+              name="basicCost"
+              value={basicCost}
+              onChange={onInputsChange}
+              required
+            />
+            <label>청소비용</label>
+            <Input
+              placeholder="청소비용을 입력해주세요."
+              name="cleanUpCost"
+              value={cleanUpCost}
+              onChange={onInputsChange}
+              required
+            />
+          </section>
+          <hr />
+          <section>
+            <h1>숙소 기본 정보</h1>
+            <RoomInfoCount
+              value={roomCounter}
+              onCounterChange={onCounterChange}
+            />
+          </section>
+          <hr />
+          <section>
+            <h1>편의시설</h1>
+            <Checkbox onChange={onCheckBoxChange} name="tv">
+              TV
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="hairDryer">
+              헤어드라이어
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="fireExtinguisher">
+              소화기
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="refrigerator">
+              냉장고
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="microwave">
+              전자레인지
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="cookware">
+              조리도구
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="aircon">
+              에어컨
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="park">
+              주차장
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="kitchen">
+              부엌
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="wifi">
+              WIFI
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="washingMachine">
+              세탁기
+            </Checkbox>
+          </section>
+          <hr />
+          <section>
+            <h1>알아두면 좋은 정보</h1>
+            <Checkbox onChange={onCheckBoxChange} name="selfCheckIn">
+              셀프체크인
+            </Checkbox>
+            <Checkbox onChange={onCheckBoxChange} name="commonSolo">
+              전체를 단독으로 사용
+            </Checkbox>
+          </section>
+          <hr />
+          <section>
+            <h1>본문내용</h1>
+
+            <h3>간단한 설명</h3>
+            <textarea
+              placeholder="500자 이내로 작성"
+              name="content"
+              required
+              value={content}
+              onChange={onInputsChange}
+            />
+          </section>
+          <hr />
+          <Button type="primary" htmlType="submit" block>
+            제출 하기
+          </Button>
+        </form>
+      )}
+
+      {isSended && (
+        <>
           <h3>이미지</h3>
+          <p>이미지를 업로드 하세요.</p>
           <ImgCrop rotate>
             <Upload
-              action="https://react-http-training-199ed-default-rtdb.firebaseio.com"
+              action={`http://192.168.64.1:8080/rooms/${roomnum}/images`}
               listType="picture-card"
               fileList={fileList}
               onChange={onChange}
@@ -280,20 +311,8 @@ const HostingForm = () => {
               {fileList.length < 5 && "+ Upload"}
             </Upload>
           </ImgCrop>
-          <h3>간단한 설명</h3>
-          <textarea
-            placeholder="500자 이내로 작성"
-            name="content"
-            required
-            value={content}
-            onChange={onInputsChange}
-          />
-        </section>
-        <hr />
-        <Button type="primary" htmlType="submit" block>
-          제출 하기
-        </Button>
-      </form>
+        </>
+      )}
     </div>
   );
 };

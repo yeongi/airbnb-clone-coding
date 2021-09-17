@@ -24,6 +24,7 @@ export const hostPostAxios = async (data) => {
   try {
     const response = await RoomAPI.post("/rooms/", JSON.stringify(data));
     console.log("통신 성공!", response);
+    return response;
   } catch (e) {
     console.log(e);
   }

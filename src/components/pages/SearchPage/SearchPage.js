@@ -28,11 +28,12 @@ const SearchPage = (props) => {
   const location = useLocation();
 
   const query = queryString.parse(location.search);
+  const [page, setPage] = useState(1);
   console.log(query);
 
   useEffect(() => {
     //프로미스 객체
-    const RoomPromise = getRoomAxios(1);
+    const RoomPromise = getRoomAxios(page);
     RoomPromise.then((response) => {
       // 성공 시 데이터를 가져옴
       // data를 배열로 작업하는 함수
@@ -41,7 +42,7 @@ const SearchPage = (props) => {
       setRoom(list);
       console.log(list);
     });
-  }, []);
+  }, [page]);
 
   const [curFocusingAddr, setFocusAddr] = useState(DUMMY_ROOMS[0].address);
 
@@ -65,6 +66,12 @@ const SearchPage = (props) => {
     default:
       break;
   }
+
+  const pageClickHandler = (e) => {
+    // console.log(e.target.innerHTML);
+    setPage(e.target.innerHTML);
+    document.body.scrollTop = 0;
+  };
 
   const SearchedRoomContent = roomList.map((room) => {
     return (
@@ -102,7 +109,12 @@ const SearchPage = (props) => {
           {title}
           {SearchedRoomContent}
           <hr />
-          <div className={classes.footer}>발</div>
+          <div className={classes.footer}>
+            <nav>
+              <li onClick={pageClickHandler}>1</li>
+              <li onClick={pageClickHandler}>2</li>
+            </nav>
+          </div>
         </div>
       </div>
       <KaKaoMap className={classes.map} addr={curFocusingAddr} />
